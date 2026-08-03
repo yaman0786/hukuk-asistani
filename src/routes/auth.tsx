@@ -1,12 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import logo from "@/assets/logo.png";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { RECAPTCHA_SITE_KEY } from "@/config/recaptcha";
 
@@ -99,24 +97,34 @@ function AuthPage() {
 
   async function handleGoogle() {
     setLoading(true);
-    const redirect_uri = `${window.location.origin}${nextPath}`;
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri,
-    });
-    if (result.error) {
-      toast.error("Google girişi başarısız");
+    try {
+      const redirectTo = `${window.location.origin}${nextPath}`;
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo,
+          queryParams: { access_type: "offline", prompt: "select_account" },
+        },
+      });
+      if (error) throw error;
+      // Supabase redirects the browser to Google. If it does not, stop the
+      // spinner and show a useful error instead of leaving the button stuck.
+      window.setTimeout(() => setLoading(false), 8000);
+    } catch (err) {
+      toast.error(
+        err instanceof Error
+          ? `Google girişi başlatılamadı: ${err.message}`
+          : "Google girişi başlatılamadı. Lütfen tekrar deneyin.",
+      );
       setLoading(false);
-      return;
     }
-    if (result.redirected) return;
-    window.location.replace(nextPath);
   }
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center text-center mb-8">
-          <img src={logo} alt="Türkiye Hukuk Master AI" width={72} height={72} className="mb-4" />
+          <img src="/assets/hukuk-mark.svg" alt="Hukuk Asistanı" width={72} height={72} className="mb-4" />
           <h1 className="font-serif text-3xl text-foreground leading-tight">
             Türkiye Hukuk Master AI
             <span className="block text-base font-normal text-muted-foreground mt-1">
