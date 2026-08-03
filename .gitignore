@@ -1,0 +1,14 @@
+node_modules/
+.output/
+.tanstack/
+.wrangler/
+.vercel/
+.env
+.env.*
+!.env.example
+dist/
+coverage/
+*.log
+.DS_Store
+ios/App/App/GoogleService-Info.plist
+

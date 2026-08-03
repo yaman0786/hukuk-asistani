@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /auth
+Disallow: /_authenticated
+Disallow: /api/
+
+Sitemap: https://droit-navigator.lovable.app/sitemap.xml

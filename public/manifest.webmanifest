@@ -1,0 +1,16 @@
+{
+  "name": "Türkiye Hukuk Master AI",
+  "short_name": "Hukuk AI",
+  "description": "Türkçe profesyonel hukuki araştırma, içtihat analizi ve dilekçe hazırlama asistanı.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "lang": "tr",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "64x64", "type": "image/x-icon" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}

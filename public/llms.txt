@@ -1,0 +1,12 @@
+# Türkiye Hukuk Master AI
+
+> Türk hukuku için profesyonel yapay zekâ hukuk asistanı: mevzuat araştırması, içtihat analizi, dosya inceleme, strateji ve dilekçe hazırlama.
+
+Türkiye Hukuk Master AI, avukatlar, hukuk öğrencileri ve vatandaşlar için tasarlanmış Türkçe bir hukuki yapay zekâ asistanıdır. Sistem yalnızca bilgilendirme amaçlıdır ve hukuki tavsiye niteliği taşımaz.
+
+## Pages
+
+- [Ana Sayfa](/): Ürün tanıtımı ve giriş.
+- [Gizlilik Politikası](/gizlilik): Kişisel veri işleme ve saklama.
+- [Kullanım Şartları](/kullanim-sartlari): Hizmet koşulları ve sorumluluk sınırları.
+- [KVKK Aydınlatma Metni](/kvkk): 6698 sayılı Kanun kapsamında aydınlatma.
