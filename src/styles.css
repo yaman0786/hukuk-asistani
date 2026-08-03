@@ -336,7 +336,41 @@ button, a, input, textarea, select {
   section.py-16, section.py-20, section.py-24 { padding-top: 44px; padding-bottom: 44px; }
   section h2 { letter-spacing: -.025em; }
   section .grid > article, section .grid > div { min-width: 0; }
+
+  .mobile-secondary-section { display: none; }
+  .mobile-action-bar {
+    position: fixed;
+    z-index: 50;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    left: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+    padding: 7px 6px;
+    border: 1px solid color-mix(in oklab, var(--color-border) 85%, var(--color-accent));
+    border-radius: 20px;
+    background: color-mix(in oklab, var(--color-card) 90%, transparent);
+    box-shadow: 0 18px 40px -20px color-mix(in oklab, var(--color-primary) 55%, transparent);
+    backdrop-filter: blur(18px);
+  }
+  .mobile-action-item {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    border-radius: 14px;
+    color: var(--color-muted-foreground);
+    font-size: 9px;
+    font-weight: 600;
+    flex-direction: column;
+  }
+  .mobile-action-item.is-active { color: var(--color-primary); background: color-mix(in oklab, var(--color-primary) 9%, transparent); }
+  .mobile-action-primary { color: var(--color-primary-foreground); background: var(--color-primary); transform: translateY(-8px); box-shadow: 0 8px 18px -10px var(--color-primary); }
 }
+
+@media (min-width: 768px) { .mobile-action-bar { display: none; } }
 
 /* Shared premium surface language across landing, chat and workspace screens. */
 @layer components {
