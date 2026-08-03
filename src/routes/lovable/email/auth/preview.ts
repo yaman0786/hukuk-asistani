@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render } from "@react-email/render";
+import { renderToStaticMarkup } from "react-dom/server";
 import { createFileRoute } from "@tanstack/react-router";
 import { SignupEmail } from "@/lib/email-templates/signup";
 import { InviteEmail } from "@/lib/email-templates/invite";
@@ -91,7 +91,9 @@ export const Route = createFileRoute("/lovable/email/auth/preview")({
         }
 
         const sampleData = SAMPLE_DATA[type] || {};
-        const html = await render(React.createElement(EmailTemplate, sampleData));
+        // Keep the preview route self-contained. This avoids bundling the
+        // optional @react-email/render dependency into Vercel's Nitro build.
+        const html = `<!doctype html>${renderToStaticMarkup(React.createElement(EmailTemplate, sampleData))}`;
 
         return new Response(html, {
           status: 200,
