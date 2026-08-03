@@ -12,3 +12,4 @@ coverage/
 .DS_Store
 ios/App/App/GoogleService-Info.plist
 
+.vercel
