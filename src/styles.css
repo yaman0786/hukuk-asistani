@@ -374,6 +374,21 @@ button, a, input, textarea, select {
 
 /* Shared premium surface language across landing, chat and workspace screens. */
 @layer components {
+  .hearing-stage {
+    background: radial-gradient(circle at 50% -20%, color-mix(in oklab, var(--color-accent) 18%, transparent), transparent 16rem), color-mix(in oklab, var(--color-primary) 4%, var(--color-card));
+    box-shadow: 0 16px 34px -28px color-mix(in oklab, var(--color-primary) 55%, transparent);
+  }
+
+  .hearing-seat {
+    border: 1px solid color-mix(in oklab, var(--color-border) 85%, var(--color-primary));
+    border-radius: 0.85rem;
+    padding: 0.7rem 0.35rem;
+    color: var(--color-muted-foreground);
+    background: color-mix(in oklab, var(--color-card) 82%, transparent);
+  }
+
+  .hearing-seat-judge { color: var(--color-primary); border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border)); }
+
   .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl {
     box-shadow: 0 1px 2px color-mix(in oklab, var(--color-foreground) 4%, transparent);
   }

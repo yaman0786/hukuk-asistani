@@ -954,6 +954,24 @@ function CourtroomPage() {
             )}
           </div>
 
+          <div className="hearing-stage rounded-2xl border border-primary/20 p-4 sm:p-5">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <p className="legal-eyebrow">Canlı celse</p>
+                <h3 className="mt-1 text-base font-semibold">Duruşma salonu aktif</h3>
+              </div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
+                <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" /> Bağlantı açık
+              </span>
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-center text-[11px]">
+              <div className="hearing-seat hearing-seat-judge"><Gavel className="mx-auto mb-1 size-5" /><span>Hâkim</span></div>
+              <div className="hearing-seat"><Users className="mx-auto mb-1 size-5" /><span>{participants.length || 1} katılımcı</span></div>
+              <div className="hearing-seat"><FileText className="mx-auto mb-1 size-5" /><span>{turns.length} tutanak</span></div>
+            </div>
+            <p className="mt-3 text-center text-xs text-muted-foreground">{PHASES[phaseIndex]?.label ?? "Celse hazırlanıyor"} · Beyanlar sırayla işleniyor</p>
+          </div>
+
           {/* Hızlı filtre — mobilde yatay kaydırmalı, üstte sabit */}
           <div className="sticky top-0 z-10 -mx-4 border-b border-border/70 bg-background/95 px-4 py-2 backdrop-blur sm:mx-0 sm:rounded-xl sm:border sm:px-3">
             <div className="no-scrollbar flex items-center gap-2 overflow-x-auto">
