@@ -1,15 +1,16 @@
 {
-  "name": "Türkiye Hukuk Master AI",
-  "short_name": "Hukuk AI",
+  "name": "Hukuk Asistanı",
+  "short_name": "Hukuk Asistanı",
   "description": "Türkçe profesyonel hukuki araştırma, içtihat analizi ve dilekçe hazırlama asistanı.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0b0f14",
-  "theme_color": "#0b0f14",
+  "background_color": "#faf7f0",
+  "theme_color": "#0b1f33",
   "lang": "tr",
   "icons": [
+    { "src": "/assets/hukuk-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" },
     { "src": "/favicon.ico", "sizes": "64x64", "type": "image/x-icon" },
     { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
   ]

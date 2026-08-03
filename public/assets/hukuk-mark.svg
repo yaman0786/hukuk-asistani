@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Hukuk Asistanı markası</title>
+  <desc id="desc">Lacivert bir daire içinde altın adalet terazisi</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0b1f33"/>
+      <stop offset="1" stop-color="#163e5d"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f5d58a"/>
+      <stop offset="1" stop-color="#b88932"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="32" fill="url(#bg)"/>
+  <circle cx="64" cy="64" r="49" fill="none" stroke="#f5d58a" stroke-opacity=".28" stroke-width="2"/>
+  <path d="M64 27v67M42 42h44M30 99h68" stroke="url(#gold)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M42 42 27 63c7 10 23 10 30 0L42 42ZM86 42 71 63c7 10 23 10 30 0L86 42Z" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="64" cy="28" r="6" fill="#f5d58a"/>
+</svg>

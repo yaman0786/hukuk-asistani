@@ -20,7 +20,6 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { Copy, ExternalLink, Loader2 } from "lucide-react";
-import logo from "@/assets/logo.png";
 import {
   Scale,
   FileText,
@@ -155,7 +154,7 @@ function Landing() {
       <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
           <Link to="/" aria-label="Ana sayfa" className="shrink-0 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-            <img src={logo} alt="Türkiye Hukuk Master AI ana sayfa" width={32} height={32} className="rounded-md" />
+            <img src="/assets/hukuk-mark.svg" alt="Hukuk Asistanı ana sayfa" width={36} height={36} className="rounded-[11px] shadow-sm" />
           </Link>
           <div className="flex-1 min-w-0">
             <div className="font-serif text-[15px] leading-tight truncate">
