@@ -1579,7 +1579,7 @@ function SiteFooter() {
       <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <img src={logo} alt="" width={28} height={28} className="rounded" />
+            <img src="/assets/hukuk-mark.svg" alt="" width={32} height={32} className="rounded-[9px]" />
             <div className="font-serif text-sm">Türkiye Hukuk Master AI</div>
           </div>
           <p className="text-xs text-muted-foreground mt-3 max-w-sm">
