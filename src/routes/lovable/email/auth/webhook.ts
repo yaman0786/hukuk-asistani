@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createAuthEmailHandler } from "@lovable.dev/email-js";
 import { createFileRoute } from "@tanstack/react-router";
 import { SignupEmail } from "@/lib/email-templates/signup";
 import { InviteEmail } from "@/lib/email-templates/invite";
@@ -17,8 +16,11 @@ const SITE_URL = `https://${ROOT_DOMAIN}`;
 
 // The SDK handler owns verification, dispatch, and retry semantics; this file
 // owns only the email decisions: subjects, templates, and per-type props.
-const handler = createAuthEmailHandler({
-  apiKey: process.env.LOVABLE_API_KEY!,
+const createHandler = async () => {
+  if (!process.env.LOVABLE_API_KEY) return null;
+  const { createAuthEmailHandler } = await import("@lovable.dev/email-js");
+  return createAuthEmailHandler({
+  apiKey: process.env.LOVABLE_API_KEY,
   from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
   senderDomain: SENDER_DOMAIN,
   sendUrl: process.env.LOVABLE_SEND_URL,
@@ -80,12 +82,17 @@ const handler = createAuthEmailHandler({
         React.createElement(ReauthenticationEmail, { token: data.token ?? "" }),
     },
   },
-});
+  });
+};
 
 export const Route = createFileRoute("/lovable/email/auth/webhook")({
   server: {
     handlers: {
-      POST: ({ request }) => handler(request),
+      POST: async ({ request }) => {
+        const handler = await createHandler();
+        if (!handler) return Response.json({ error: "Email service is not configured" }, { status: 503 });
+        return handler(request);
+      },
     },
   },
 });
