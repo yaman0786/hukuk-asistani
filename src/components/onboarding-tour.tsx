@@ -17,7 +17,7 @@ const KEY = "hukuk-ai-onboarding-v1";
 const STEPS = [
   {
     icon: Scale,
-    title: "Türkiye Hukuk Master AI'ya Hoş Geldiniz",
+    title: "Hukuk Asistanı'ya Hoş Geldiniz",
     body: "Mevzuat, içtihat, dilekçe hazırlama ve dosya analizinde uzmanlaşmış bir hukuki asistan. Her cevap net kaynak atıflarıyla verilir.",
   },
   {

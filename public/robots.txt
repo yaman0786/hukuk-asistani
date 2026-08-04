@@ -4,4 +4,4 @@ Disallow: /auth
 Disallow: /_authenticated
 Disallow: /api/
 
-Sitemap: https://droit-navigator.lovable.app/sitemap.xml
+Sitemap: https://hukuk-asistani-eta.vercel.app/sitemap.xml

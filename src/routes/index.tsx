@@ -1531,7 +1531,7 @@ function FaqSection() {
   const faqs = [
     {
       q: "Yapay zekâ hukuki tavsiye verir mi?",
-      a: "Hayır. Türkiye Hukuk Master AI hukuki bilgi ve strateji önerileri sunar; ancak bağlayıcı hukuki tavsiye niteliği taşımaz. Kritik dosyalarda bir avukatla teyit önerilir.",
+      a: "Hayır. Hukuk Asistanı hukuki bilgi ve strateji önerileri sunar; ancak bağlayıcı hukuki tavsiye niteliği taşımaz. Kritik dosyalarda bir avukatla teyit önerilir.",
     },
     {
       q: "e-Devlet veya UYAP'a bağlanıyor mu?",

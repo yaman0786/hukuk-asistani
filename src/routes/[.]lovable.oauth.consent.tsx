@@ -96,7 +96,7 @@ function Consent() {
           <h1 className="font-serif text-2xl leading-tight">
             {clientName} uygulamasına erişim izni
           </h1>
-          <p className="text-xs text-muted-foreground mt-2">Türkiye Hukuk Master AI</p>
+          <p className="text-xs text-muted-foreground mt-2">Hukuk Asistanı</p>
         </div>
 
         <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-4">

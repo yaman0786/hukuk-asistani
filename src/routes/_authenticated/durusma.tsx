@@ -108,7 +108,7 @@ const DESC =
 export const Route = createFileRoute("/_authenticated/durusma")({
   head: () => ({
     meta: [
-      { title: `${TITLE} | Türkiye Hukuk Master AI` },
+      { title: `${TITLE} | Hukuk Asistanı` },
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },

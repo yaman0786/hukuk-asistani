@@ -22,7 +22,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
     <Body style={main}>
       <Container style={container}>
         <Section style={brandBar}>
-          <Text style={brandText}>Türkiye Hukuk Master AI</Text>
+          <Text style={brandText}>Hukuk Asistanı</Text>
         </Section>
         <Heading style={h1}>Kimliğinizi doğrulayın</Heading>
         <Text style={text}>Aşağıdaki kodu kullanarak kimliğinizi doğrulayın:</Text>

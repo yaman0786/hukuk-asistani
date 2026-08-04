@@ -13,13 +13,13 @@ export const Route = createFileRoute("/sablonlar")({
     typeof search.kategori === "string" ? { kategori: search.kategori } : {},
   head: () => ({
     meta: [
-      { title: "Dilekçe Şablonları — Türkiye Hukuk Master AI" },
+      { title: "Dilekçe Şablonları — Hukuk Asistanı" },
       {
         name: "description",
         content:
           "Boşanma, işe iade, icra itirazı, tüketici hakem, kira tespit, ceza savunma dahil hazır Türkçe hukuk dilekçe şablonları.",
       },
-      { property: "og:title", content: "Dilekçe Şablonları — Türkiye Hukuk Master AI" },
+      { property: "og:title", content: "Dilekçe Şablonları — Hukuk Asistanı" },
       {
         property: "og:description",
         content: "Değişkenleri doldurun, AI hemen dilekçenizi hazırlasın.",

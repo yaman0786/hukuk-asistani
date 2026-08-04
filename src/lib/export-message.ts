@@ -3,7 +3,7 @@ import jsPDF from "jspdf";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from "docx";
 
 const FOOTER =
-  "\n\n---\nBu belge Türkiye Hukuk Master AI tarafından üretilmiştir. Yalnızca bilgilendirme amaçlıdır; hukuki tavsiye niteliği taşımaz.";
+  "\n\n---\nBu belge Hukuk Asistanı tarafından üretilmiştir. Yalnızca bilgilendirme amaçlıdır; hukuki tavsiye niteliği taşımaz.";
 
 function safeName(base: string, ext: string) {
   const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
@@ -104,7 +104,7 @@ export async function exportDocx(text: string, title = "Hukuki Değerlendirme") 
     new Paragraph({
       children: [
         new TextRun({
-          text: "Bu belge Türkiye Hukuk Master AI tarafından üretilmiştir. Yalnızca bilgilendirme amaçlıdır; hukuki tavsiye niteliği taşımaz.",
+          text: "Bu belge Hukuk Asistanı tarafından üretilmiştir. Yalnızca bilgilendirme amaçlıdır; hukuki tavsiye niteliği taşımaz.",
           italics: true,
           size: 18,
         }),

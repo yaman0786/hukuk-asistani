@@ -92,7 +92,7 @@ export const Route = createFileRoute("/kararlar/$kind")({
   head: ({ params }) => {
     const key = params.kind as CategoryKey;
     const cfg = CATEGORY[key] ?? CATEGORY.emsal;
-    const title = `${cfg.title} — Türkiye Hukuk Master AI`;
+    const title = `${cfg.title} — Hukuk Asistanı`;
     const desc = cfg.subtitle;
     return {
       meta: [

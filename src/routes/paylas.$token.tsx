@@ -7,7 +7,7 @@ import { Scale, ShieldAlert } from "lucide-react";
 export const Route = createFileRoute("/paylas/$token")({
   head: () => ({
     meta: [
-      { title: "Paylaşılan Dosya — Türkiye Hukuk Master AI" },
+      { title: "Paylaşılan Dosya — Hukuk Asistanı" },
       { name: "description", content: "Paylaşılan hukuki sohbetin salt-okunur görünümü." },
       { property: "og:title", content: "Paylaşılan Hukuki Sohbet" },
       { property: "og:description", content: "Salt-okunur paylaşım linki." },
@@ -52,7 +52,7 @@ function SharedPage() {
       <header className="border-b border-border">
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center gap-2">
           <Scale className="w-5 h-5 text-primary" />
-          <span className="font-serif">Türkiye Hukuk Master AI</span>
+          <span className="font-serif">Hukuk Asistanı</span>
           <span className="ml-auto text-[10px] uppercase tracking-wider text-muted-foreground">
             Salt-okunur paylaşım
           </span>

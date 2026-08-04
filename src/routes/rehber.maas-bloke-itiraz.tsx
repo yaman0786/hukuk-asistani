@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-const CANONICAL = "https://droit-navigator.lovable.app/rehber/maas-bloke-itiraz";
+const CANONICAL = "https://hukuk-asistani-eta.vercel.app/rehber/maas-bloke-itiraz";
 
 export const Route = createFileRoute("/rehber/maas-bloke-itiraz")({
   head: () => ({
     meta: [
-      { title: "Maaş Hesabına Bloke Konulması ve İtiraz Süreci — Türkiye Hukuk Master AI" },
+      { title: "Maaş Hesabına Bloke Konulması ve İtiraz Süreci — Hukuk Asistanı" },
       {
         name: "description",
         content:
@@ -36,13 +36,13 @@ export const Route = createFileRoute("/rehber/maas-bloke-itiraz")({
           headline: "Maaş Hesabına Bloke Konulması ve İtiraz Süreci",
           description:
             "Maaş hesabına icra blokesi, İİK kapsamında yasal sınırlar ve itiraz süreci hakkında kapsamlı rehber.",
-          author: { "@type": "Organization", name: "Türkiye Hukuk Master AI" },
+          author: { "@type": "Organization", name: "Hukuk Asistanı" },
           publisher: {
             "@type": "Organization",
-            name: "Türkiye Hukuk Master AI",
+            name: "Hukuk Asistanı",
             logo: {
               "@type": "ImageObject",
-              url: "https://droit-navigator.lovable.app/apple-touch-icon.png",
+              url: "https://hukuk-asistani-eta.vercel.app/apple-touch-icon.png",
             },
           },
           mainEntityOfPage: CANONICAL,
@@ -181,7 +181,7 @@ function MaasBlokeRehberi() {
 
           <div className="mt-8 rounded-lg border border-border bg-muted/30 p-4">
             <p className="text-sm">
-              <strong>Yapay zekâ ile dilekçenizi hazırlayın:</strong> Türkiye Hukuk Master AI ile
+              <strong>Yapay zekâ ile dilekçenizi hazırlayın:</strong> Hukuk Asistanı ile
               dosyanızı yükleyip{" "}
               <Link to="/sablonlar" className="underline">
                 hazır şablonlardan

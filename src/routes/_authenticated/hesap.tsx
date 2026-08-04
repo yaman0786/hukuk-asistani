@@ -13,7 +13,7 @@ import { useServerFn } from "@tanstack/react-start";
 export const Route = createFileRoute("/_authenticated/hesap")({
   head: () => ({
     meta: [
-      { title: "Hesabım — Türkiye Hukuk Master AI" },
+      { title: "Hesabım — Hukuk Asistanı" },
       { name: "description", content: "Abonelik, fatura, veri ve hesap yönetimi." },
       { name: "robots", content: "noindex,nofollow" },
     ],

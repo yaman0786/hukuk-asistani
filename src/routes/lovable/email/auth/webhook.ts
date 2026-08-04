@@ -8,7 +8,7 @@ import { EmailChangeEmail } from "@/lib/email-templates/email-change";
 import { ReauthenticationEmail } from "@/lib/email-templates/reauthentication";
 
 // Configuration
-const SITE_NAME = "Türkiye Hukuk Master AI";
+const SITE_NAME = "Hukuk Asistanı";
 const SENDER_DOMAIN = "notify.ozc.yaman.com";
 const ROOT_DOMAIN = "ozc.yaman.com";
 const FROM_DOMAIN = "ozc.yaman.com";

@@ -3,22 +3,22 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/kullanim-sartlari")({
   head: () => ({
     meta: [
-      { title: "Kullanım Şartları — Türkiye Hukuk Master AI" },
+      { title: "Kullanım Şartları — Hukuk Asistanı" },
       {
         name: "description",
         content:
-          "Türkiye Hukuk Master AI kullanım şartları: hizmet kapsamı, kullanıcı yükümlülükleri ve sorumluluk sınırları.",
+          "Hukuk Asistanı kullanım şartları: hizmet kapsamı, kullanıcı yükümlülükleri ve sorumluluk sınırları.",
       },
-      { property: "og:title", content: "Kullanım Şartları — Türkiye Hukuk Master AI" },
+      { property: "og:title", content: "Kullanım Şartları — Hukuk Asistanı" },
       {
         property: "og:description",
         content: "Hizmetin kullanım koşulları ve sorumluluk sınırları.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "https://droit-navigator.lovable.app/kullanim-sartlari" },
+      { property: "og:url", content: "https://hukuk-asistani-eta.vercel.app/kullanim-sartlari" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://droit-navigator.lovable.app/kullanim-sartlari" }],
+    links: [{ rel: "canonical", href: "https://hukuk-asistani-eta.vercel.app/kullanim-sartlari" }],
   }),
   component: TermsPage,
 });
@@ -36,7 +36,7 @@ function TermsPage() {
         <div className="space-y-4 text-sm leading-relaxed">
           <h2 className="font-serif text-lg mt-6">1. Hizmet Kapsamı</h2>
           <p>
-            Türkiye Hukuk Master AI, kullanıcılara Türkiye hukuku ile ilgili genel bilgilendirme,
+            Hukuk Asistanı, kullanıcılara Türkiye hukuku ile ilgili genel bilgilendirme,
             hukuki araştırma özeti ve dilekçe/belge taslağı üretimi sağlayan bir yapay zekâ
             asistanıdır.
           </p>

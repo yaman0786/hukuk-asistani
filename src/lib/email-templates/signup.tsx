@@ -53,7 +53,7 @@ export const SignupEmail = ({
         </Button>
         <Text style={footer}>Bu kaydı siz yapmadıysanız bu e‑postayı yok sayabilirsiniz.</Text>
         <Text style={disclaimer}>
-          Türkiye Hukuk Master AI, bilgilendirme amaçlı bir hukuki asistandır ve avukatlık hizmeti
+          Hukuk Asistanı, bilgilendirme amaçlı bir hukuki asistandır ve avukatlık hizmeti
           yerine geçmez.
         </Text>
       </Container>

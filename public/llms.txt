@@ -1,8 +1,8 @@
-# Türkiye Hukuk Master AI
+# Hukuk Asistanı
 
 > Türk hukuku için profesyonel yapay zekâ hukuk asistanı: mevzuat araştırması, içtihat analizi, dosya inceleme, strateji ve dilekçe hazırlama.
 
-Türkiye Hukuk Master AI, avukatlar, hukuk öğrencileri ve vatandaşlar için tasarlanmış Türkçe bir hukuki yapay zekâ asistanıdır. Sistem yalnızca bilgilendirme amaçlıdır ve hukuki tavsiye niteliği taşımaz.
+Hukuk Asistanı, avukatlar, hukuk öğrencileri ve vatandaşlar için tasarlanmış Türkçe bir hukuki yapay zekâ asistanıdır. Sistem yalnızca bilgilendirme amaçlıdır ve hukuki tavsiye niteliği taşımaz.
 
 ## Pages
 

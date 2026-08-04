@@ -3,22 +3,22 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/kvkk")({
   head: () => ({
     meta: [
-      { title: "KVKK Aydınlatma Metni — Türkiye Hukuk Master AI" },
+      { title: "KVKK Aydınlatma Metni — Hukuk Asistanı" },
       {
         name: "description",
         content:
           "6698 sayılı KVKK kapsamında kişisel verilerinizin işlenmesi hakkında aydınlatma metni.",
       },
-      { property: "og:title", content: "KVKK Aydınlatma Metni — Türkiye Hukuk Master AI" },
+      { property: "og:title", content: "KVKK Aydınlatma Metni — Hukuk Asistanı" },
       {
         property: "og:description",
         content: "Kişisel verilerinizin işlenmesi ve haklarınız hakkında bilgi.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "https://droit-navigator.lovable.app/kvkk" },
+      { property: "og:url", content: "https://hukuk-asistani-eta.vercel.app/kvkk" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://droit-navigator.lovable.app/kvkk" }],
+    links: [{ rel: "canonical", href: "https://hukuk-asistani-eta.vercel.app/kvkk" }],
   }),
   component: KvkkPage,
 });

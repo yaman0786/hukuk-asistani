@@ -30,13 +30,13 @@ export const Route = createFileRoute("/auth")({
 
   head: () => ({
     meta: [
-      { title: "Giriş — Türkiye Hukuk Master AI" },
+      { title: "Giriş — Hukuk Asistanı" },
       {
         name: "description",
         content:
           "Türkiye hukuk sistemi için profesyonel yapay zekâ hukuk asistanı. Giriş yapın veya hesap oluşturun.",
       },
-      { property: "og:title", content: "Giriş — Türkiye Hukuk Master AI" },
+      { property: "og:title", content: "Giriş — Hukuk Asistanı" },
       {
         property: "og:description",
         content: "Hesabınıza giriş yapın veya kayıt olun; hukuki dosyalarınızı güvenle yönetin.",
@@ -126,7 +126,7 @@ function AuthPage() {
         <div className="flex flex-col items-center text-center mb-8">
           <img src="/assets/hukuk-mark.svg" alt="Hukuk Asistanı" width={72} height={72} className="mb-4" />
           <h1 className="font-serif text-3xl text-foreground leading-tight">
-            Türkiye Hukuk Master AI
+            Hukuk Asistanı
             <span className="block text-base font-normal text-muted-foreground mt-1">
               Profesyonel Hukuki Asistan
             </span>

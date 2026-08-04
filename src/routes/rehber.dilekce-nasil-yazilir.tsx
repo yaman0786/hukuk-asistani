@@ -26,12 +26,12 @@ const SAMPLES = [
   },
 ];
 
-const CANONICAL = "https://droit-navigator.lovable.app/rehber/dilekce-nasil-yazilir";
+const CANONICAL = "https://hukuk-asistani-eta.vercel.app/rehber/dilekce-nasil-yazilir";
 
 export const Route = createFileRoute("/rehber/dilekce-nasil-yazilir")({
   head: () => ({
     meta: [
-      { title: "Dilekçe Nasıl Yazılır? Örnek ve Adım Adım Rehber — Türkiye Hukuk Master AI" },
+      { title: "Dilekçe Nasıl Yazılır? Örnek ve Adım Adım Rehber — Hukuk Asistanı" },
       {
         name: "description",
         content:
@@ -68,13 +68,13 @@ export const Route = createFileRoute("/rehber/dilekce-nasil-yazilir")({
           headline: "Dilekçe Nasıl Yazılır? Adım Adım Rehber",
           description:
             "Türkiye'de dilekçe yazımının bölümleri, biçim kuralları ve örnekleriyle kapsamlı rehber.",
-          author: { "@type": "Organization", name: "Türkiye Hukuk Master AI" },
+          author: { "@type": "Organization", name: "Hukuk Asistanı" },
           publisher: {
             "@type": "Organization",
-            name: "Türkiye Hukuk Master AI",
+            name: "Hukuk Asistanı",
             logo: {
               "@type": "ImageObject",
-              url: "https://droit-navigator.lovable.app/apple-touch-icon.png",
+              url: "https://hukuk-asistani-eta.vercel.app/apple-touch-icon.png",
             },
           },
           mainEntityOfPage: CANONICAL,
@@ -381,7 +381,7 @@ function DilekceGuidePage() {
 
         <h2>Yapay Zekâ ile Dilekçe Hazırlama</h2>
         <p>
-          Türkiye Hukuk Master AI, dilekçenizin taslağını Türk hukuk mevzuatına uygun biçimde
+          Hukuk Asistanı, dilekçenizin taslağını Türk hukuk mevzuatına uygun biçimde
           hazırlamanıza yardımcı olur. Olayınızı anlatın; uygun kanun maddeleri, içtihat atıfları ve
           talep sonuçlarıyla birlikte bir taslak alın.{" "}
           <Link to="/" className="underline font-medium">

@@ -3,22 +3,22 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/gizlilik")({
   head: () => ({
     meta: [
-      { title: "Gizlilik Politikası — Türkiye Hukuk Master AI" },
+      { title: "Gizlilik Politikası — Hukuk Asistanı" },
       {
         name: "description",
         content:
-          "Türkiye Hukuk Master AI gizlilik politikası: toplanan veriler, işleme amaçları, saklama süreleri ve kullanıcı hakları.",
+          "Hukuk Asistanı gizlilik politikası: toplanan veriler, işleme amaçları, saklama süreleri ve kullanıcı hakları.",
       },
-      { property: "og:title", content: "Gizlilik Politikası — Türkiye Hukuk Master AI" },
+      { property: "og:title", content: "Gizlilik Politikası — Hukuk Asistanı" },
       {
         property: "og:description",
         content: "Verilerinizi nasıl işliyoruz ve haklarınızı nasıl kullanabilirsiniz.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "https://droit-navigator.lovable.app/gizlilik" },
+      { property: "og:url", content: "https://hukuk-asistani-eta.vercel.app/gizlilik" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://droit-navigator.lovable.app/gizlilik" }],
+    links: [{ rel: "canonical", href: "https://hukuk-asistani-eta.vercel.app/gizlilik" }],
   }),
   component: PrivacyPage,
 });
@@ -35,7 +35,7 @@ function PrivacyPage() {
 
         <div className="prose prose-sm dark:prose-invert max-w-none space-y-4 text-sm leading-relaxed">
           <p>
-            Türkiye Hukuk Master AI ("Uygulama"), kullanıcıların hukuki sorularını yanıtlamak
+            Hukuk Asistanı ("Uygulama"), kullanıcıların hukuki sorularını yanıtlamak
             amacıyla yapay zekâ tabanlı bir asistan hizmeti sunar. Bu politika, Uygulama'yı
             kullandığınızda hangi verilerin toplandığını, nasıl işlendiğini ve haklarınızı açıklar.
           </p>

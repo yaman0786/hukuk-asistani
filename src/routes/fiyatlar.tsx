@@ -11,17 +11,17 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/fiyatlar")({
   head: () => ({
     meta: [
-      { title: "Fiyatlandırma — Türkiye Hukuk Master AI" },
+      { title: "Fiyatlandırma — Hukuk Asistanı" },
       {
         name: "description",
         content:
           "Ücretsiz, Pro ve Kurumsal planlar. Türkiye hukuk mevzuatına özel AI asistan. Aylık ve yıllık ödeme seçenekleri.",
       },
-      { property: "og:title", content: "Fiyatlandırma — Türkiye Hukuk Master AI" },
+      { property: "og:title", content: "Fiyatlandırma — Hukuk Asistanı" },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://droit-navigator.lovable.app/fiyatlar" },
+      { property: "og:url", content: "https://hukuk-asistani-eta.vercel.app/fiyatlar" },
     ],
-    links: [{ rel: "canonical", href: "https://droit-navigator.lovable.app/fiyatlar" }],
+    links: [{ rel: "canonical", href: "https://hukuk-asistani-eta.vercel.app/fiyatlar" }],
   }),
   component: PricingPage,
 });
@@ -211,7 +211,7 @@ function PricingPage() {
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-10 max-w-3xl mx-auto">
-          Türkiye Hukuk Master AI bir yazılım aracıdır ve hukuki tavsiye yerine geçmez. Kullanım
+          Hukuk Asistanı bir yazılım aracıdır ve hukuki tavsiye yerine geçmez. Kullanım
           şartları için{" "}
           <Link to="/kullanim-sartlari" className="underline">
             buraya

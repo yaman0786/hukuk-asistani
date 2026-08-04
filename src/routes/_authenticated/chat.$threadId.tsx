@@ -118,7 +118,7 @@ export const Route = createFileRoute("/_authenticated/chat/$threadId")({
         name: "description",
         content: "Mevzuat, içtihat, delil ve dilekçe için profesyonel Türkçe hukuki AI asistan.",
       },
-      { property: "og:title", content: "Hukuki Sohbet — Türkiye Hukuk Master AI" },
+      { property: "og:title", content: "Hukuki Sohbet — Hukuk Asistanı" },
       {
         property: "og:description",
         content:
@@ -1119,7 +1119,7 @@ function ChatPage() {
               {threadsQ.data?.find((t) => t.id === threadId)?.title ?? "Yeni Dosya"}
               <span className="sr-only">
                 {" "}
-                — Türkiye Hukuk Master AI, Profesyonel Hukuki Asistan
+                — Hukuk Asistanı, Profesyonel Hukuki Asistan
               </span>
             </h1>
             <div className="text-[10px] text-muted-foreground uppercase tracking-wider">

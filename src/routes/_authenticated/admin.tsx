@@ -17,7 +17,7 @@ import { ArrowLeft, Shield, Database, Loader2, RefreshCw } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
-      { title: "Admin — Türkiye Hukuk Master AI" },
+      { title: "Admin — Hukuk Asistanı" },
       { name: "description", content: "Yönetim paneli." },
       { name: "robots", content: "noindex,nofollow" },
     ],

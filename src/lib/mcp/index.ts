@@ -12,10 +12,10 @@ const projectRef = import.meta.env.VITE_SUPABASE_PROJECT_ID ?? "project-ref-unse
 
 export default defineMcp({
   name: "hukuk-master-ai-mcp",
-  title: "Türkiye Hukuk Master AI",
+  title: "Hukuk Asistanı",
   version: "0.1.0",
   instructions:
-    "Türkiye Hukuk Master AI kullanıcısının kendi sohbet dosyalarını (davalar/dosyalar) listeleyip okuyabilir, yeni dosya oluşturabilir, yeniden adlandırabilir veya silebilir. Tüm işlemler giriş yapan kullanıcı adına yapılır; başka bir kullanıcının verisine erişilemez.",
+    "Hukuk Asistanı kullanıcısının kendi sohbet dosyalarını (davalar/dosyalar) listeleyip okuyabilir, yeni dosya oluşturabilir, yeniden adlandırabilir veya silebilir. Tüm işlemler giriş yapan kullanıcı adına yapılır; başka bir kullanıcının verisine erişilemez.",
   auth: auth.oauth.issuer({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated",
