@@ -225,8 +225,37 @@ function Landing() {
       </main>
 
       <SiteFooter />
+      <QuickAccessDock />
       <MobileActionBar />
     </div>
+  );
+}
+
+function QuickAccessDock() {
+  const items = [
+    { href: "#asistan", label: "Asistan", icon: MessageSquareText },
+    { href: "#ozellikler", label: "Özellikler", icon: Sparkles },
+    { href: "#gundem", label: "Gündem", icon: Newspaper },
+    { href: "/durusma", label: "Duruşma", icon: Gavel },
+    { href: "/sablonlar", label: "Şablonlar", icon: FileText },
+  ];
+  return (
+    <aside className="quick-access-dock" aria-label="Hızlı erişim">
+      <div className="quick-access-label">Hızlı erişim</div>
+      {items.map(({ href, label, icon: Icon }) =>
+        href.startsWith("#") ? (
+          <a key={href} href={href} className="quick-access-item" aria-label={label}>
+            <Icon className="h-4 w-4" />
+            <span>{label}</span>
+          </a>
+        ) : (
+          <Link key={href} to={href} className="quick-access-item" aria-label={label}>
+            <Icon className="h-4 w-4" />
+            <span>{label}</span>
+          </Link>
+        ),
+      )}
+    </aside>
   );
 }
 
@@ -399,7 +428,7 @@ function Hero() {
   }, [typed, target, reducedMotion]);
 
   return (
-    <section className="legal-surface relative overflow-hidden border-b border-border">
+    <section id="asistan" className="legal-surface relative overflow-hidden border-b border-border">
       {/* Ambient background — hidden on mobile for performance */}
       <div className="pointer-events-none absolute inset-0 -z-10 hidden md:block">
         <div className="absolute -top-40 -left-32 w-[520px] h-[520px] rounded-full bg-primary/15 blur-3xl animate-float-slow" />

@@ -372,6 +372,56 @@ button, a, input, textarea, select {
 
 @media (min-width: 768px) { .mobile-action-bar { display: none; } }
 
+.quick-access-dock {
+  position: fixed;
+  z-index: 40;
+  right: 18px;
+  top: 50%;
+  display: grid;
+  gap: 4px;
+  width: 54px;
+  padding: 8px;
+  transform: translateY(-50%);
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, var(--color-accent));
+  border-radius: 18px;
+  background: color-mix(in oklab, var(--color-card) 86%, transparent);
+  box-shadow: 0 18px 45px -24px color-mix(in oklab, var(--color-primary) 55%, transparent);
+  backdrop-filter: blur(18px);
+  transition: width .2s ease, padding .2s ease;
+}
+.quick-access-dock:hover, .quick-access-dock:focus-within { width: 142px; }
+.quick-access-label {
+  overflow: hidden;
+  max-width: 0;
+  color: var(--color-muted-foreground);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: max-width .2s ease;
+}
+.quick-access-dock:hover .quick-access-label, .quick-access-dock:focus-within .quick-access-label { max-width: 120px; padding: 0 5px 5px; }
+.quick-access-item {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+  border-radius: 11px;
+  color: var(--color-muted-foreground);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .2s ease, color .2s ease;
+}
+.quick-access-item span { display: none; }
+.quick-access-dock:hover .quick-access-item, .quick-access-dock:focus-within .quick-access-item { justify-content: flex-start; padding: 0 8px; }
+.quick-access-dock:hover .quick-access-item span, .quick-access-dock:focus-within .quick-access-item span { display: inline; }
+.quick-access-item:hover, .quick-access-item:focus-visible { color: var(--color-primary); background: color-mix(in oklab, var(--color-primary) 10%, transparent); outline: none; }
+@media (max-width: 767px) { .quick-access-dock { display: none; } }
+
 /* Shared premium surface language across landing, chat and workspace screens. */
 @layer components {
   .hearing-stage {
