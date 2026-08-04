@@ -1139,7 +1139,7 @@ function UzmanlikGrid() {
     { icon: Baby, label: "Miras Hukuku", sub: "Paylaşım · İzale-i şuyu" },
   ];
   return (
-    <section className="border-b border-border">
+    <section className="landing-optional-section border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
@@ -1247,7 +1247,7 @@ function HowItWorks() {
     },
   ];
   return (
-    <section className="mobile-secondary-section border-b border-border">
+    <section className="landing-optional-section mobile-secondary-section border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
@@ -1325,7 +1325,7 @@ function Personas() {
     { key: "ogrenci", label: "Öğrenciler", icon: GraduationCap },
   ];
   return (
-    <section className="mobile-secondary-section border-b border-border bg-muted/30">
+    <section className="landing-optional-section mobile-secondary-section border-b border-border bg-muted/30">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
@@ -1386,7 +1386,7 @@ function StatsBand() {
     { n: "24/7", l: "her an erişim" },
   ];
   return (
-    <section className="mobile-secondary-section border-b border-border bg-primary text-primary-foreground">
+    <section className="landing-optional-section mobile-secondary-section border-b border-border bg-primary text-primary-foreground">
       <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         {stats.map((s) => (
           <div key={s.l}>
@@ -1423,7 +1423,7 @@ function Testimonials() {
     },
   ];
   return (
-    <section className="mobile-secondary-section border-b border-border">
+    <section className="landing-optional-section mobile-secondary-section border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
@@ -1481,7 +1481,7 @@ function PricingPreview() {
     },
   ];
   return (
-    <section className="mobile-secondary-section border-b border-border bg-muted/30">
+    <section className="landing-optional-section mobile-secondary-section border-b border-border bg-muted/30">
       <div className="max-w-5xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
@@ -1557,7 +1557,7 @@ function FaqSection() {
     },
   ];
   return (
-    <section id="sss" className="mobile-secondary-section border-b border-border">
+    <section id="sss" className="landing-optional-section mobile-secondary-section border-b border-border">
       <div className="max-w-3xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
