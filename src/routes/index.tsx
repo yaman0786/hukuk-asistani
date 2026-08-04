@@ -210,17 +210,7 @@ function Landing() {
       <main>
         <Hero />
         <TrustStrip />
-        <GundemSection />
-        <KararKategorileri />
         <FeatureBento />
-        <UzmanlikGrid />
-        <PopularTemplates />
-        <HowItWorks />
-        <Personas />
-        <StatsBand />
-        <Testimonials />
-        <PricingPreview />
-        <FaqSection />
         <FinalCta />
       </main>
 
