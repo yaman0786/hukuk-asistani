@@ -210,7 +210,11 @@ function Landing() {
       <main>
         <Hero />
         <TrustStrip />
+        <GundemSection />
+        <KararKategorileri />
         <FeatureBento />
+        <PopularTemplates />
+        <HowItWorks />
         <FinalCta />
       </main>
 
@@ -672,7 +676,7 @@ function GundemSection() {
   };
 
   return (
-    <section id="gundem" className="mobile-secondary-section border-b border-border">
+    <section id="gundem" className="border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
           <div>
@@ -936,7 +940,7 @@ function KararKategorileri() {
     },
   ];
   return (
-    <section id="kararlar" className="mobile-secondary-section border-b border-border">
+    <section id="kararlar" className="border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-14">
         <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
           <div>
@@ -1129,7 +1133,7 @@ function UzmanlikGrid() {
     { icon: Baby, label: "Miras Hukuku", sub: "Paylaşım · İzale-i şuyu" },
   ];
   return (
-    <section className="landing-optional-section border-b border-border">
+    <section className="mobile-secondary-section border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
@@ -1177,7 +1181,7 @@ function PopularTemplates() {
     { title: "Suç Duyurusu Dilekçesi", cat: "Ceza Hukuku" },
   ];
   return (
-    <section className="mobile-secondary-section border-b border-border bg-muted/30">
+    <section className="border-b border-border bg-muted/30">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="flex items-end justify-between mb-8 flex-wrap gap-3">
           <div>
@@ -1237,7 +1241,7 @@ function HowItWorks() {
     },
   ];
   return (
-    <section className="landing-optional-section mobile-secondary-section border-b border-border">
+    <section className="border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
@@ -1315,7 +1319,7 @@ function Personas() {
     { key: "ogrenci", label: "Öğrenciler", icon: GraduationCap },
   ];
   return (
-    <section className="landing-optional-section mobile-secondary-section border-b border-border bg-muted/30">
+    <section className="border-b border-border bg-muted/30">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
@@ -1413,7 +1417,7 @@ function Testimonials() {
     },
   ];
   return (
-    <section className="landing-optional-section mobile-secondary-section border-b border-border">
+    <section className="border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
