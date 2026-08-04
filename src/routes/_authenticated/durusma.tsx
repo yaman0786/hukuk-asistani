@@ -10,6 +10,8 @@ import {
   FileText,
   Gavel,
   History,
+  Landmark,
+  Mic,
   Loader2,
   Lock,
   LogOut,
@@ -964,12 +966,24 @@ function CourtroomPage() {
                 <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" /> Bağlantı açık
               </span>
             </div>
-            <div className="grid grid-cols-3 gap-2 text-center text-[11px]">
-              <div className="hearing-seat hearing-seat-judge"><Gavel className="mx-auto mb-1 size-5" /><span>Hâkim</span></div>
-              <div className="hearing-seat"><Users className="mx-auto mb-1 size-5" /><span>{participants.length || 1} katılımcı</span></div>
-              <div className="hearing-seat"><FileText className="mx-auto mb-1 size-5" /><span>{turns.length} tutanak</span></div>
+            <div className="hearing-room-scene">
+              <div className="hearing-bench hearing-seat-judge">
+                <Gavel className="size-5" />
+                <div><strong>Hâkim</strong><span>Başkanlık kürsüsü</span></div>
+                <span className="hearing-live-dot" aria-label="aktif" />
+              </div>
+              <div className="hearing-clerk"><FileText className="size-4" /> Zabıt kâtibi · Tutanak {turns.length}</div>
+              <div className="hearing-party-row">
+                <div className="hearing-party hearing-party-left"><Users className="size-4" /><span>Davacı / vekili</span></div>
+                <div className="hearing-party hearing-party-right"><Users className="size-4" /><span>Davalı / vekili</span></div>
+              </div>
+              <div className="hearing-room-footer">
+                <span><Landmark className="size-3.5" /> {setup.court}</span>
+                <span><Mic className="size-3.5" /> {participants.length || 1} katılımcı</span>
+                <span>{PHASES[phaseIndex]?.label ?? "Celse hazırlanıyor"}</span>
+              </div>
             </div>
-            <p className="mt-3 text-center text-xs text-muted-foreground">{PHASES[phaseIndex]?.label ?? "Celse hazırlanıyor"} · Beyanlar sırayla işleniyor</p>
+            <p className="mt-3 text-center text-xs text-muted-foreground">Beyanlar sırasıyla kayda alınıyor · Oturum kodu: <span className="font-mono">{roomCode || "—"}</span></p>
           </div>
 
           {/* Hızlı filtre — mobilde yatay kaydırmalı, üstte sabit */}

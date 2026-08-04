@@ -446,6 +446,20 @@ button, a, input, textarea, select {
 
   .hearing-seat-judge { color: var(--color-primary); border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border)); }
 
+  .hearing-room-scene { position: relative; overflow: hidden; border: 1px solid color-mix(in oklab, var(--color-border) 80%, var(--color-primary)); border-radius: 1rem; padding: 1rem; background: linear-gradient(180deg, color-mix(in oklab, var(--color-primary) 7%, transparent), transparent 65%), var(--color-background); }
+  .hearing-bench, .hearing-party, .hearing-clerk { display: flex; align-items: center; gap: .55rem; border: 1px solid var(--color-border); border-radius: .75rem; background: color-mix(in oklab, var(--color-card) 86%, transparent); padding: .7rem .8rem; color: var(--color-foreground); }
+  .hearing-bench { max-width: 19rem; margin: 0 auto; justify-content: center; border-color: color-mix(in oklab, var(--color-primary) 45%, var(--color-border)); box-shadow: 0 10px 20px -16px var(--color-primary); }
+  .hearing-bench div { display: grid; text-align: left; }
+  .hearing-bench span:not(.hearing-live-dot), .hearing-party span { color: var(--color-muted-foreground); font-size: .68rem; }
+  .hearing-live-dot { width: .45rem; height: .45rem; margin-left: auto; border-radius: 999px; background: #22c55e; box-shadow: 0 0 0 4px color-mix(in oklab, #22c55e 16%, transparent); }
+  .hearing-clerk { width: fit-content; margin: .7rem auto; color: var(--color-muted-foreground); font-size: .68rem; }
+  .hearing-party-row { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .hearing-party-left { justify-content: flex-start; border-left: 3px solid var(--color-primary); }
+  .hearing-party-right { justify-content: flex-end; border-right: 3px solid var(--color-accent); }
+  .hearing-room-footer { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem 1.2rem; margin-top: .8rem; color: var(--color-muted-foreground); font-size: .68rem; }
+  .hearing-room-footer span { display: inline-flex; align-items: center; gap: .3rem; }
+  @media (max-width: 480px) { .hearing-party-row { gap: .4rem; } .hearing-party { padding: .6rem .45rem; font-size: .7rem; } .hearing-room-footer { gap: .5rem; } }
+
   .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl {
     box-shadow: 0 1px 2px color-mix(in oklab, var(--color-foreground) 4%, transparent);
   }
