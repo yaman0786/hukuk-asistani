@@ -55,7 +55,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Türkiye Hukuk Master AI — Profesyonel Türkçe Hukuki Yapay Zekâ Asistanı",
+        title: "Hukuk Asistanı — Profesyonel Türkçe Hukuki Yapay Zekâ Asistanı",
       },
       {
         name: "description",
@@ -65,7 +65,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       {
         property: "og:title",
-        content: "Türkiye Hukuk Master AI — Hukuki Yapay Zekâ Asistanı",
+        content: "Hukuk Asistanı — Hukuki Yapay Zekâ Asistanı",
       },
       {
         property: "og:description",
@@ -73,7 +73,7 @@ export const Route = createFileRoute("/")({
           "Mevzuat araması, içtihat analizi, dilekçe hazırlama ve dosya inceleme tek platformda.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Türkiye Hukuk Master AI" },
+      { name: "twitter:title", content: "Hukuk Asistanı" },
       {
         name: "twitter:description",
         content: "Profesyonel Türkçe hukuki yapay zekâ asistanı.",
@@ -158,7 +158,7 @@ function Landing() {
           </Link>
           <div className="flex-1 min-w-0">
             <div className="font-serif text-[15px] leading-tight truncate">
-              Türkiye Hukuk Master AI
+              Hukuk Asistanı
             </div>
             <div className="text-[10px] text-muted-foreground uppercase tracking-wider">
               Profesyonel Hukuki Asistan
@@ -1593,7 +1593,7 @@ function SiteFooter() {
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
             <img src="/assets/hukuk-mark.svg" alt="" width={32} height={32} className="rounded-[9px]" />
-            <div className="font-serif text-sm">Türkiye Hukuk Master AI</div>
+            <div className="font-serif text-sm">Hukuk Asistanı</div>
           </div>
           <p className="text-xs text-muted-foreground mt-3 max-w-sm">
             Türkiye mevzuatı ve içtihatları üzerine eğitilmiş profesyonel hukuki yapay zekâ
@@ -1673,7 +1673,7 @@ function SiteFooter() {
       </div>
       <div className="border-t border-border">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row gap-2 items-center justify-between text-[11px] text-muted-foreground">
-          <div>© {new Date().getFullYear()} Türkiye Hukuk Master AI</div>
+          <div>© {new Date().getFullYear()} Hukuk Asistanı</div>
           <div>Made with care for Turkish legal professionals.</div>
         </div>
       </div>

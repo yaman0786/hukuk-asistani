@@ -113,7 +113,7 @@ import {
 export const Route = createFileRoute("/_authenticated/chat/$threadId")({
   head: () => ({
     meta: [
-      { title: "Sohbet — Türkiye Hukuk Master AI" },
+      { title: "Sohbet — Hukuk Asistanı" },
       {
         name: "description",
         content: "Mevzuat, içtihat, delil ve dilekçe için profesyonel Türkçe hukuki AI asistan.",
