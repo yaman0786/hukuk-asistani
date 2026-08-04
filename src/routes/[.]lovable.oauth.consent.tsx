@@ -2,7 +2,6 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
 
 // Beta auth.oauth namespace — narrow local typing so TypeScript is happy.
 type OAuthResult = {
@@ -93,7 +92,7 @@ function Consent() {
     <main className="min-h-screen flex items-center justify-center px-4 py-10 bg-background text-foreground">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center text-center mb-6">
-          <img src={logo} alt="" width={56} height={56} className="mb-3" />
+          <img src="/assets/hukuk-mark.svg" alt="Hukuk Asistanı" width={56} height={56} className="mb-3" />
           <h1 className="font-serif text-2xl leading-tight">
             {clientName} uygulamasına erişim izni
           </h1>

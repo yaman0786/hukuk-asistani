@@ -93,7 +93,6 @@ import {
 } from "lucide-react";
 
 import { toast } from "sonner";
-import logo from "@/assets/logo.png";
 import { exportPdf, exportDocx, exportMarkdown } from "@/lib/export-message";
 import {
   DropdownMenu,
@@ -707,7 +706,7 @@ function ChatPage() {
         }`}
       >
         <div className="p-4 border-b border-sidebar-border flex items-center gap-3">
-          <img src={logo} alt="" width={32} height={32} />
+          <img src="/assets/hukuk-mark.svg" alt="Hukuk Asistanı" width={32} height={32} />
           <div className="flex-1 min-w-0">
             <div className="font-serif text-sm text-sidebar-foreground leading-tight">
               Hukuk Master AI

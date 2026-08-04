@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "viewport",
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
-      { title: "Türkiye Hukuk Master AI — Profesyonel Hukuki Asistan" },
+      { title: "Hukuk Asistanı — Profesyonel Türkçe Hukuki Asistan" },
       {
         name: "description",
         content:
@@ -94,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
       { name: "apple-mobile-web-app-title", content: "Hukuk AI" },
-      { property: "og:title", content: "Türkiye Hukuk Master AI — Profesyonel Hukuki Asistan" },
+      { property: "og:title", content: "Hukuk Asistanı — Profesyonel Türkçe Hukuki Asistan" },
       {
         property: "og:description",
         content:
@@ -117,14 +117,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@graph": [
             {
               "@type": "Organization",
-              name: "Türkiye Hukuk Master AI",
-              url: "https://droit-navigator.lovable.app",
-              logo: "https://droit-navigator.lovable.app/apple-touch-icon.png",
+              name: "Hukuk Asistanı",
+              url: "https://hukuk-asistani-eta.vercel.app",
+              logo: "https://hukuk-asistani-eta.vercel.app/assets/hukuk-mark.svg",
             },
             {
               "@type": "WebSite",
-              name: "Türkiye Hukuk Master AI",
-              url: "https://droit-navigator.lovable.app",
+              name: "Hukuk Asistanı",
+              url: "https://hukuk-asistani-eta.vercel.app",
               inLanguage: "tr-TR",
               description:
                 "Türkçe mevzuat, içtihat, dosya analizi ve dilekçe hazırlama için profesyonel yapay zekâ hukuk asistanı.",
