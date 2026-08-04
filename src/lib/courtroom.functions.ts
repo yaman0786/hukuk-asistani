@@ -46,6 +46,7 @@ const actionSchema = z.enum([
   "KARAR",
   "KARAR_TALEBI",
 ]);
+const phaseSchema = z.enum(["ACILIS", "ON_INCELEME", "TAHKIKAT", "SOZLU", "HUKUM"]);
 
 
 const turnSchema = z.object({
@@ -136,6 +137,7 @@ export const continueHearing = createServerFn({ method: "POST" })
         caseType: caseTypeSchema,
         userRole: userRoleSchema,
         action: actionSchema,
+        phase: phaseSchema.optional(),
         transcript: z.array(turnSchema).max(80),
         userStatement: z.string().min(1).max(4000),
       })
@@ -157,6 +159,7 @@ GÖREV: Devam eden duruşmada kullanıcının işleminden sonraki konuşmaları 
 Dava türü: ${CASE_TYPE_LABEL[data.caseType]}
 Kullanıcının sıfatı: ${USER_ROLE_LABEL[data.userRole]}
 Kullanıcının yaptığı usulî işlem: ${ACTION_LABEL[data.action as CourtAction]}
+Celse aşaması: ${data.phase ?? "ACILIS"}
 
 USUL YETKİSİ: Kullanıcı yalnızca kendi sıfatının yetkili olduğu işlemi yapar. Hüküm kurmayı yalnızca hâkim, esas hakkında mütalaayı yalnızca Cumhuriyet savcısı yapabilir; tanık yalnızca kendisine sorulan soruyu cevaplar. Kullanıcı sıfatını aşan bir talepte bulunursa hâkim bunu usulen reddetsin.
 
@@ -172,7 +175,7 @@ ${transcriptToText(data.transcript as HearingTurn[]).slice(-12000)}
 === KULLANICININ SON İŞLEMİ (${USER_ROLE_LABEL[data.userRole]} — ${ACTION_LABEL[data.action as CourtAction]}) ===
 ${data.userStatement}
 
-Bu işleme karşı tarafın cevabı/itirazı, hâkimin soruları veya ara kararı ve gerekiyorsa savcı/bilirkişi görüşü ile devam et. 3-6 konuşma; her biri 2-5 cümle. İşlemin hukuken zayıf yanı varsa karşı taraf bunu usulüne uygun dile getirsin.
+Bu aşamanın dışına taşma. AÇILIŞ/ÖN İNCELEMEDE usulî itirazlar, taraf sıfatları, talepler ve eksiklerin tespiti; TAHKİKATTA deliller, tanık ve bilirkişi; SÖZLÜ YARGILAMADA esas hakkındaki beyanlar ve mütalaa; HÜKÜMDE yalnızca hâkimin taslak hüküm yönü konuşulabilir. Kullanıcının işleminden sonra karşı tarafın cevabı/itirazı, hâkimin soruları veya ara kararı ve gerekiyorsa savcı/bilirkişi görüşü ile devam et. 3-6 konuşma; her biri 2-5 cümle. İşlemin hukuken zayıf yanı varsa karşı taraf bunu usulen dile getirsin.
 
 JSON: {"turns":[{"role":"","speaker":"","text":""}]}`;
 
@@ -320,5 +323,4 @@ ${data.verdict.slice(0, 8000)}`;
     const text = await callModel(key, prompt);
     return { text: text.trim() };
   });
-
 

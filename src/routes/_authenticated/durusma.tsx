@@ -587,6 +587,7 @@ function CourtroomPage() {
         data: {
           ...payload,
           action,
+          phase: PHASES[phaseIndex]?.key ?? "ACILIS",
           transcript: next.map((t) => ({ role: t.role, speaker: t.speaker, text: t.text })),
           userStatement: text,
         },
