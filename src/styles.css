@@ -324,6 +324,10 @@ button, a, input, textarea, select {
   header .font-serif { font-size: 14px; }
   header .text-\[10px\] { font-size: 9px; letter-spacing: .12em; }
   header button { min-height: 42px; }
+  .mobile-chat-composer { position: sticky; bottom: 0; z-index: 25; padding-bottom: calc(.75rem + env(safe-area-inset-bottom, 0px)); background: color-mix(in oklab, var(--color-card) 94%, transparent); }
+  .mobile-chat-composer textarea { min-height: 48px; max-height: 112px; font-size: 16px; line-height: 1.35; }
+  .mobile-chat-composer button { min-height: 42px; }
+  [data-message-content] { overflow-wrap: anywhere; }
 
   section.relative > div.max-w-6xl { padding-top: 36px; padding-bottom: 42px; }
   section.relative h1 { font-size: clamp(2.35rem, 11vw, 4rem); line-height: 1.02; letter-spacing: -.045em; }

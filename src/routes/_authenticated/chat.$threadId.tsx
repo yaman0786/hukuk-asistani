@@ -1494,7 +1494,7 @@ function ChatPage() {
           <ConversationScrollButton />
         </Conversation>
 
-        <div className="border-t border-border bg-card/40 backdrop-blur px-4 py-3">
+        <div className="mobile-chat-composer border-t border-border bg-card/40 backdrop-blur px-4 py-3">
           <div className="max-w-3xl mx-auto">
             <PromptInput
               onSubmit={handleSubmit}
