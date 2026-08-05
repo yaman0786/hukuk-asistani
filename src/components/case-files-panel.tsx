@@ -19,6 +19,8 @@ import {
   Search,
   AlertTriangle,
   CheckCircle2,
+  CalendarDays,
+  Clock3,
 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -457,6 +459,40 @@ export function CaseFilesPanel() {
                 ? "Analiz edilmemiş dosyaları inceleyin; delil, çelişki ve eksik bilgi özeti üretilecek."
                 : "Son raporu açın ve dosyayı duruşma provasında test edin."}
             </div>
+          </div>
+        )}
+
+        {allFiles.length > 0 && (
+          <div className="mb-4 rounded-xl border border-border bg-card/60 p-4">
+            <div className="mb-3 flex items-center gap-2">
+              <CalendarDays className="size-4 text-primary" />
+              <div>
+                <h4 className="text-sm font-semibold">Dosya zaman çizelgesi</h4>
+                <p className="text-[11px] text-muted-foreground">Dosyanızdaki çalışma adımlarının kronolojik görünümü.</p>
+              </div>
+            </div>
+            <div className="relative space-y-3 pl-5 before:absolute before:bottom-2 before:left-[7px] before:top-2 before:w-px before:bg-border">
+              {[...allFiles]
+                .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                .slice(0, 5)
+                .map((f) => (
+                  <div key={f.id} className="relative flex items-start gap-2 text-xs">
+                    <span className="absolute -left-[17px] mt-1 size-2.5 rounded-full border-2 border-background bg-primary" />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="truncate font-medium">{f.title}</span>
+                        <time className="inline-flex shrink-0 items-center gap-1 text-[10px] text-muted-foreground">
+                          <Clock3 className="size-3" /> {new Date(f.created_at).toLocaleDateString("tr-TR")}
+                        </time>
+                      </div>
+                      <p className="mt-0.5 text-[11px] text-muted-foreground">
+                        Dosya yüklendi · {f.last_analyzed_at ? `Son analiz ${new Date(f.last_analyzed_at).toLocaleDateString("tr-TR")}` : "Analiz bekliyor"}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+            <p className="mt-3 flex items-center gap-1.5 text-[10px] text-muted-foreground"><Clock3 className="size-3" /> Resmî tebligat ve süreleri ayrıca dosya notlarına ekleyin; sistem bunları kesin süre olarak varsaymaz.</p>
           </div>
         )}
 
