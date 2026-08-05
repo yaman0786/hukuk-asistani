@@ -164,6 +164,7 @@ function CourtroomPage() {
   const [participants, setParticipants] = useState<LiveParticipant[]>([]);
   const [joinCode, setJoinCode] = useState("");
   const [isOwner, setIsOwner] = useState(true);
+  const [realtimeStatus, setRealtimeStatus] = useState<"connecting" | "connected" | "disconnected">("disconnected");
 
   const { data: pastHearings, refetch: refetchHearings } = useQuery({
     queryKey: ["my-hearings"],
@@ -322,6 +323,7 @@ function CourtroomPage() {
     onTurn: handleRemoteTurn,
     onParticipant: refreshParticipants,
     onVerdict: handleRemoteVerdict,
+    onStatus: setRealtimeStatus,
   });
 
   const payload = {
@@ -963,8 +965,9 @@ function CourtroomPage() {
                 <p className="legal-eyebrow">Canlı celse</p>
                 <h3 className="mt-1 text-base font-semibold">Duruşma salonu aktif</h3>
               </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
-                <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" /> Bağlantı açık
+              <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${realtimeStatus === "connected" ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300" : realtimeStatus === "connecting" ? "bg-amber-500/10 text-amber-700 dark:text-amber-300" : "bg-destructive/10 text-destructive"}`}>
+                <span className={`size-1.5 rounded-full ${realtimeStatus === "connected" ? "animate-pulse bg-emerald-500" : realtimeStatus === "connecting" ? "animate-pulse bg-amber-500" : "bg-destructive"}`} />
+                {realtimeStatus === "connected" ? "Canlı bağlantı" : realtimeStatus === "connecting" ? "Bağlanıyor…" : "Bağlantı yenileniyor"}
               </span>
             </div>
             <div className="hearing-room-scene">

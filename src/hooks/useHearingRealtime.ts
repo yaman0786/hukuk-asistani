@@ -12,12 +12,14 @@ export function useHearingRealtime(
     onTurn: (turn: LiveTurn) => void;
     onParticipant?: () => void;
     onVerdict?: (verdict: string) => void;
+    onStatus?: (status: "connecting" | "connected" | "disconnected") => void;
   },
 ) {
-  const { onTurn, onParticipant, onVerdict } = handlers;
+  const { onTurn, onParticipant, onVerdict, onStatus } = handlers;
 
   useEffect(() => {
     if (!hearingId) return;
+    onStatus?.("connecting");
 
     const channel = supabase
       .channel(`hearing:${hearingId}`)
@@ -54,10 +56,15 @@ export function useHearingRealtime(
           if (verdict) onVerdict?.(verdict);
         },
       )
-      .subscribe();
+      .subscribe((status) => {
+        if (status === "SUBSCRIBED") onStatus?.("connected");
+        if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") {
+          onStatus?.("disconnected");
+        }
+      });
 
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [hearingId, onTurn, onParticipant, onVerdict]);
+  }, [hearingId, onTurn, onParticipant, onVerdict, onStatus]);
 }

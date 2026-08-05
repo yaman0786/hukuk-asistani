@@ -11,8 +11,7 @@ describe("extractCitations", () => {
     expect(out).toHaveLength(1);
     expect(out[0].kind).toBe("mevzuat");
     expect(out[0].label).toBe("TBK m. 49");
-    expect(out[0].href).toContain("google.com/search");
-    expect(out[0].href).toContain(encodeURIComponent("mevzuat.gov.tr TBK m. 49"));
+    expect(out[0].href).toBe("https://www.mevzuat.gov.tr/");
   });
 
   it("parses ictihat E./K. pattern", () => {
