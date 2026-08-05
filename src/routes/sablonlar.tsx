@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { listTemplates, startFromTemplate } from "@/lib/templates.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Scale, FileText, ArrowLeft, Search } from "lucide-react";
+import { Scale, FileText, ArrowLeft, Search, CheckCircle2, ShieldAlert } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/sablonlar")({
@@ -47,6 +47,7 @@ function TemplatesPage() {
   const [active, setActive] = useState<string | null>(null);
   const [values, setValues] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
 
   const templatesQ = useQuery({ queryKey: ["templates"], queryFn: () => listFn() });
 
@@ -76,6 +77,13 @@ function TemplatesPage() {
 
   async function handleStart() {
     if (!activeTpl) return;
+    const missing = vars.filter((v) => v.required && !values[v.key]?.trim());
+    if (missing.length > 0) {
+      setShowErrors(true);
+      toast.error(`${missing.length} zorunlu alanı doldurun.`);
+      return;
+    }
+    setShowErrors(false);
     setBusy(true);
     try {
       // Şablondan dilekçe hazırlamak için giriş şart — aksi halde server fn 401 döner.
@@ -180,6 +188,7 @@ function TemplatesPage() {
               onClick={() => {
                 setActive(t.id);
                 setValues({});
+                setShowErrors(false);
               }}
               className="text-left p-4 min-h-[88px] border border-border rounded-lg hover:border-primary hover:bg-accent/30 active:bg-accent/50 transition"
             >
@@ -218,6 +227,18 @@ function TemplatesPage() {
               </div>
               <h2 className="font-serif text-lg">{activeTpl.title}</h2>
               <p className="text-xs text-muted-foreground mt-1">{activeTpl.description}</p>
+              <div className="mt-3 flex items-center justify-between text-xs">
+                <span className="text-muted-foreground">Stüdyo adımı 1/2 · Bilgileri doldur</span>
+                <span className="font-medium text-primary">
+                  {vars.filter((v) => values[v.key]?.trim()).length}/{vars.length} tamamlandı
+                </span>
+              </div>
+              <div className="mt-2 h-1.5 rounded-full bg-muted overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-primary transition-all"
+                  style={{ width: `${vars.length ? (vars.filter((v) => values[v.key]?.trim()).length / vars.length) * 100 : 100}%` }}
+                />
+              </div>
             </div>
             <div className="p-4 space-y-4 overflow-y-auto flex-1">
               {vars.length === 0 && (
@@ -235,18 +256,33 @@ function TemplatesPage() {
                       value={values[v.key] ?? ""}
                       onChange={(e) => setValues((p) => ({ ...p, [v.key]: e.target.value }))}
                       placeholder={v.placeholder}
-                      className="w-full px-3 py-2.5 rounded-md border border-border bg-background text-base sm:text-sm min-h-[96px]"
+                      className={`w-full px-3 py-2.5 rounded-md border bg-background text-base sm:text-sm min-h-[96px] ${showErrors && v.required && !values[v.key]?.trim() ? "border-destructive" : "border-border"}`}
                     />
                   ) : (
                     <input
                       value={values[v.key] ?? ""}
                       onChange={(e) => setValues((p) => ({ ...p, [v.key]: e.target.value }))}
                       placeholder={v.placeholder}
-                      className="w-full px-3 py-2.5 rounded-md border border-border bg-background text-base sm:text-sm min-h-[44px]"
+                      className={`w-full px-3 py-2.5 rounded-md border bg-background text-base sm:text-sm min-h-[44px] ${showErrors && v.required && !values[v.key]?.trim() ? "border-destructive" : "border-border"}`}
                     />
+                  )}
+                  {showErrors && v.required && !values[v.key]?.trim() && (
+                    <p className="text-xs text-destructive mt-1">Bu alan zorunludur.</p>
                   )}
                 </div>
               ))}
+              <div className="rounded-lg border border-primary/20 bg-primary/5 p-3 space-y-2">
+                <div className="flex items-center gap-2 text-sm font-medium">
+                  <CheckCircle2 className="w-4 h-4 text-primary" /> Belge ön izlemesi
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {activeTpl.title} için doldurduğunuz bilgiler, kaynak kontrolü ve risk uyarılarıyla birlikte asistana aktarılacak.
+                </p>
+                <div className="flex items-start gap-2 text-[11px] text-muted-foreground">
+                  <ShieldAlert className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber-600" />
+                  Bu çıktı hukuki danışmanlık yerine geçmez; göndermeden önce yetkili bir hukukçu tarafından kontrol edilmelidir.
+                </div>
+              </div>
             </div>
             <div className="p-4 border-t border-border flex gap-2 sm:justify-end pb-[max(1rem,env(safe-area-inset-bottom))]">
               <Button
