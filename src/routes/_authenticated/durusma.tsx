@@ -253,6 +253,19 @@ function CourtroomPage() {
     return 0;
   }, [verdict, turns.length, turnCounts.DELIL]);
 
+  const readiness = useMemo(() => {
+    if (!setup) return { score: 0, label: "Hazırlanıyor" };
+    let score = 28;
+    if (setup.parties.length >= 2) score += 15;
+    if (setup.evidence.length > 0) score += 18;
+    if (setup.missing.length === 0) score += 15;
+    else score -= Math.min(15, setup.missing.length * 4);
+    if (turns.length >= 6) score += 12;
+    if (verdict) score += 12;
+    score = Math.max(0, Math.min(100, score));
+    return { score, label: score >= 75 ? "İyi hazırlanmış" : score >= 50 ? "Geliştirilmeli" : "Eksikler var" };
+  }, [setup, turns.length, verdict]);
+
 
   const endRef = useRef<HTMLDivElement>(null);
   const scrollToEnd = useCallback(() => {
@@ -876,6 +889,13 @@ function CourtroomPage() {
                 <p className="text-sm text-muted-foreground">
                   {setup.court} · {setup.caseType}
                 </p>
+              </div>
+              <div className="min-w-[150px] rounded-xl border border-border bg-muted/30 px-3 py-2">
+                <div className="flex items-center justify-between gap-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  <span>Hazırlık seviyesi</span><span>{readiness.score}/100</span>
+                </div>
+                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-border"><div className="h-full rounded-full bg-primary transition-all" style={{ width: `${readiness.score}%` }} /></div>
+                <p className="mt-1 text-[10px] text-muted-foreground">{readiness.label}</p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <HearingNotificationSettings
