@@ -1409,6 +1409,7 @@ function ChatPage() {
                           )}
                         </Message>
                       )}
+                      {isAssistant && text && <AnswerQualityBadge text={text} />}
                       {isAssistant && text && <CitationsList text={text} />}
                       {isAssistant && text && (
                         <div className="flex gap-1 pl-1 mt-1 mb-4 opacity-0 group-hover:opacity-100 transition">
@@ -1538,6 +1539,18 @@ function ChatPage() {
         threads={threadsQ.data ?? []}
         onNewThread={handleNewThread}
       />
+    </div>
+  );
+}
+
+function AnswerQualityBadge({ text }: { text: string }) {
+  const needsVerification = /doğrulama gerekli|kaynak doğrulanmalı|teyit edilmelidir|emin değil/i.test(text);
+  const hasSources = /\[Kaynak:|\[Genel İlke\]/i.test(text);
+  if (!needsVerification && !hasSources) return null;
+  return (
+    <div className={`mt-2 inline-flex max-w-full items-center gap-2 rounded-lg border px-3 py-2 text-[11px] ${needsVerification ? "border-amber-500/30 bg-amber-500/10 text-amber-800 dark:text-amber-300" : "border-emerald-500/25 bg-emerald-500/5 text-emerald-800 dark:text-emerald-300"}`}>
+      <ShieldAlert className="size-3.5 shrink-0" />
+      <span>{needsVerification ? "Bu yanıtta doğrulanması gereken noktalar var." : "Bu yanıt kaynak işaretleri içeriyor; kritik bilgileri resmî kaynaktan kontrol edin."}</span>
     </div>
   );
 }
