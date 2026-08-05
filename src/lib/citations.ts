@@ -8,7 +8,7 @@ export interface Citation {
   href?: string;
 }
 
-const MEVZUAT_BASE = "https://www.google.com/search?q=";
+const MEVZUAT_BASE = "https://www.mevzuat.gov.tr/";
 const KARAR_BASE = "https://karararama.yargitay.gov.tr/";
 
 /** Parse all `[Kaynak: ...]` and `[Genel İlke]` markers from text. */
@@ -43,14 +43,14 @@ export function extractCitations(text: string): Citation[] {
         raw,
         kind: "ictihat",
         label: inner,
-        href: KARAR_BASE + "#" + encodeURIComponent(inner),
+        href: KARAR_BASE,
       });
     } else {
       results.push({
         raw,
         kind: "mevzuat",
         label: inner,
-        href: MEVZUAT_BASE + encodeURIComponent(`mevzuat.gov.tr ${inner}`),
+        href: MEVZUAT_BASE,
       });
     }
   }

@@ -29,7 +29,7 @@ export function CitationsList({ text }: { text: string }) {
                       : "bg-accent text-foreground/70")
                   }
                 >
-                  {c.kind === "ictihat" ? "İçtihat" : "Mevzuat"}
+                  {c.kind === "ictihat" ? "Resmî içtihat" : "Resmî mevzuat"}
                 </span>
                 {c.label}
                 <ExternalLink className="w-3 h-3 opacity-60" />
