@@ -17,6 +17,8 @@ import {
   Copy,
   MessageSquare,
   Search,
+  AlertTriangle,
+  CheckCircle2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -420,6 +422,41 @@ export function CaseFilesPanel() {
                 Filtreleri temizle
               </button>
             )}
+          </div>
+        )}
+
+        {allFiles.length > 0 && (
+          <div className="mb-4 rounded-xl border border-primary/20 bg-card/70 p-4">
+            <div className="mb-3 flex items-center justify-between gap-2">
+              <div>
+                <div className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-primary">
+                  <Sparkles className="size-3.5" /> Dava istihbarat paneli
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">Dosyalarınızın çalışma durumu ve bir sonraki güvenli adım.</p>
+              </div>
+              <span className="rounded-full border border-border px-2 py-1 text-[10px] text-muted-foreground">
+                {reports.length > 0 ? "Analiz mevcut" : "Analiz bekliyor"}
+              </span>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-4">
+              {[
+                ["Toplam dosya", allFiles.length, FileText],
+                ["Bot aktif", activeCount, Bot],
+                ["Analiz edilen", allFiles.filter((f) => f.last_analyzed_at).length, CheckCircle2],
+                ["Eksik analiz", allFiles.filter((f) => !f.last_analyzed_at).length, AlertTriangle],
+              ].map(([label, value, Icon]) => (
+                <div key={label as string} className="rounded-lg border border-border/70 bg-background/60 p-2.5">
+                  <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground"><Icon className="size-3.5 text-primary" />{label as string}</div>
+                  <div className="mt-1 text-lg font-semibold tabular-nums">{value as number}</div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+              <span className="font-medium text-foreground">Önerilen sıradaki adım:</span>
+              {allFiles.some((f) => !f.last_analyzed_at)
+                ? "Analiz edilmemiş dosyaları inceleyin; delil, çelişki ve eksik bilgi özeti üretilecek."
+                : "Son raporu açın ve dosyayı duruşma provasında test edin."}
+            </div>
           </div>
         )}
 
