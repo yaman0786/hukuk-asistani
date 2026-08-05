@@ -88,6 +88,7 @@ import {
   Gavel,
   ArrowRight,
   BookOpen,
+  ClipboardCheck,
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
@@ -368,6 +369,16 @@ function ChatPage() {
       qc.invalidateQueries({ queryKey: ["usage"] });
     },
   });
+
+  const caseWorkflow = useMemo(() => {
+    const text = messages.map((m) => getMessageText(m)).join(" ").toLocaleLowerCase("tr");
+    return [
+      { label: "Vaka kaydı", done: messages.length > 0 },
+      { label: "Kaynak taraması", done: /\[kaynak:|mevzuat|yargıtay|emsal/i.test(text) },
+      { label: "Belge taslağı", done: /dilekçe|taslak|pdf|docx/i.test(text) },
+      { label: "Son kontrol", done: /doğrula|kontrol|risk|uyarı/i.test(text) },
+    ];
+  }, [messages]);
 
   // Load per-user feedback for currently visible assistant messages.
   useEffect(() => {
@@ -1124,6 +1135,22 @@ function ChatPage() {
             </h1>
             <div className="text-[10px] text-muted-foreground uppercase tracking-wider">
               Hukuki Danışma Oturumu
+            </div>
+            <div className="hidden lg:flex items-center gap-2 ml-3 pl-3 border-l border-border">
+              <ClipboardCheck className="w-3.5 h-3.5 text-primary" />
+              <span className="text-[10px] text-muted-foreground">İş akışı</span>
+              <div className="flex items-center gap-1">
+                {caseWorkflow.map((step) => (
+                  <span
+                    key={step.label}
+                    title={`${step.label}: ${step.done ? "tamamlandı" : "bekliyor"}`}
+                    className={`w-2 h-2 rounded-full ${step.done ? "bg-emerald-500" : "bg-muted-foreground/25"}`}
+                  />
+                ))}
+              </div>
+              <span className="text-[10px] font-medium text-foreground">
+                {caseWorkflow.filter((s) => s.done).length}/4
+              </span>
             </div>
           </div>
           <Link
