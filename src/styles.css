@@ -252,6 +252,22 @@
     background: #071021;
   }
   .r3f-legal-universe canvas { display: block; width: 100% !important; height: 100% !important; }
+  .route-3d-content {
+    position: relative;
+    z-index: 2;
+    min-height: 100dvh;
+    perspective: 1800px;
+    transform-style: preserve-3d;
+  }
+  .route-3d-content > * {
+    transform-style: preserve-3d;
+  }
+  .route-3d-content section,
+  .route-3d-content main,
+  .route-3d-content header,
+  .route-3d-content dialog {
+    transform-style: preserve-3d;
+  }
 
   * {
     border-color: var(--color-border);

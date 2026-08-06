@@ -182,7 +182,9 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Smart3DEnvironment />
       <R3FLegalUniverse />
-      <Outlet />
+      <div className="route-3d-content">
+        <Outlet />
+      </div>
       <CookieBanner />
     </QueryClientProvider>
   );
