@@ -100,6 +100,23 @@
 
 /* Product signature: quiet paper, editorial rhythm, and deliberate depth. */
 @layer components {
+  .landing-3d-stage { perspective: 1400px; transform-style: preserve-3d; }
+  .landing-3d-stage > .max-w-6xl { transform-style: preserve-3d; }
+  .landing-3d-card {
+    transform: rotateY(-4deg) rotateX(2deg) translateZ(18px);
+    transform-style: preserve-3d;
+    box-shadow: 24px 28px 60px -34px color-mix(in oklab, var(--color-primary) 70%, transparent);
+    transition: transform 500ms cubic-bezier(.2,.8,.2,1), box-shadow 500ms ease;
+  }
+  .landing-3d-card:hover, .landing-3d-card:focus-within {
+    transform: rotateY(-1deg) rotateX(0deg) translateZ(34px) translateY(-4px);
+    box-shadow: 30px 38px 80px -34px color-mix(in oklab, var(--color-primary) 82%, transparent);
+  }
+  @media (max-width: 1023px) { .landing-3d-card { transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .landing-3d-card, .landing-3d-card:hover, .landing-3d-card:focus-within { transform: none; transition: none; }
+  }
+
   .legal-surface {
     background:
       radial-gradient(circle at 12% 8%, color-mix(in oklab, var(--color-accent) 12%, transparent), transparent 30rem),

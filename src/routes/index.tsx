@@ -422,7 +422,7 @@ function Hero() {
   }, [typed, target, reducedMotion]);
 
   return (
-    <section id="asistan" className="legal-surface relative overflow-hidden border-b border-border">
+    <section id="asistan" className="landing-3d-stage legal-surface relative overflow-hidden border-b border-border">
       {/* Ambient background — hidden on mobile for performance */}
       <div className="pointer-events-none absolute inset-0 -z-10 hidden md:block">
         <div className="absolute -top-40 -left-32 w-[520px] h-[520px] rounded-full bg-primary/15 blur-3xl animate-float-slow" />
@@ -518,7 +518,7 @@ function ChatMock() {
   return (
     <div className="relative">
       <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-primary/20 via-primary/5 to-transparent blur-xl" />
-      <div className="legal-card relative rounded-2xl overflow-hidden">
+      <div className="landing-3d-card legal-card relative rounded-2xl overflow-hidden">
         <div
           className="relative h-44 sm:h-52 bg-cover bg-center"
           style={{ backgroundImage: "url('/assets/adalet-hero.png')" }}
