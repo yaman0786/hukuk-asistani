@@ -20,6 +20,8 @@ import {
   Send,
   ShieldCheck,
   Users,
+  CheckCircle2,
+  AlertTriangle,
 } from "lucide-react";
 import { toast } from "sonner";
 import { listCaseFiles } from "@/lib/case-files.functions";
@@ -264,6 +266,26 @@ function CourtroomPage() {
     if (verdict) score += 12;
     score = Math.max(0, Math.min(100, score));
     return { score, label: score >= 75 ? "İyi hazırlanmış" : score >= 50 ? "Geliştirilmeli" : "Eksikler var" };
+  }, [setup, turns.length, verdict]);
+
+  const hearingControl = useMemo(() => {
+    if (!setup) return { completed: 0, total: 4, next: "Duruşma açılışını tamamlayın." };
+    const checks = [
+      setup.parties.length > 0,
+      setup.evidence.length > 0,
+      turns.length >= 4,
+      Boolean(verdict),
+    ];
+    const next = !checks[0]
+      ? "Taraf bilgilerini gözden geçirin."
+      : !checks[1]
+        ? "Dosyaya delil ekleyin veya eksik delilleri not edin."
+        : !checks[2]
+          ? "En az dört beyanla karşılıklı sorgu akışını tamamlayın."
+          : !checks[3]
+            ? "Hâkim kararı veya karar talebi adımına geçin."
+            : "Tutanak hazır. Son kontrol yapıp dışa aktarabilirsiniz.";
+    return { completed: checks.filter(Boolean).length, total: checks.length, next };
   }, [setup, turns.length, verdict]);
 
 
@@ -978,6 +1000,38 @@ function CourtroomPage() {
               </div>
             )}
           </div>
+
+          <section className="rounded-2xl border border-border bg-card p-4 sm:p-5">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <p className="legal-eyebrow">Duruşma kontrol merkezi</p>
+                <h3 className="mt-1 text-base font-semibold">Dosya hazır olma kontrolü</h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Simülasyonun hangi aşamasında olduğunuzu ve güvenli sonraki adımı gösterir.
+                </p>
+              </div>
+              <Badge variant={hearingControl.completed === hearingControl.total ? "default" : "secondary"}>
+                {hearingControl.completed}/{hearingControl.total} tamamlandı
+              </Badge>
+            </div>
+            <div className="mt-4 grid gap-2 sm:grid-cols-4">
+              {[
+                ["Taraflar", setup.parties.length > 0],
+                ["Deliller", setup.evidence.length > 0],
+                ["Beyan akışı", turns.length >= 4],
+                ["Karar/tutanak", Boolean(verdict)],
+              ].map(([label, done]) => (
+                <div key={String(label)} className="flex items-center gap-2 rounded-lg border border-border/70 bg-muted/20 px-3 py-2 text-xs">
+                  {done ? <CheckCircle2 className="size-4 text-emerald-600" /> : <AlertTriangle className="size-4 text-amber-600" />}
+                  <span className={done ? "text-foreground" : "text-muted-foreground"}>{label}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-3 flex items-start gap-2 rounded-lg bg-primary/5 px-3 py-2.5 text-xs">
+              <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" />
+              <span><strong>Önerilen sonraki adım:</strong> {hearingControl.next}</span>
+            </div>
+          </section>
 
           <div className="hearing-stage rounded-2xl border border-primary/20 p-4 sm:p-5">
             <div className="mb-4 flex items-center justify-between gap-3">
