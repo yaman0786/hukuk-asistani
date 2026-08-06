@@ -182,6 +182,57 @@
 }
 
 @layer base {
+  :root {
+    --legal-3d-depth: 0 14px 34px -24px color-mix(in oklab, var(--color-primary) 42%, transparent);
+    --legal-3d-depth-hover: 0 20px 42px -24px color-mix(in oklab, var(--color-primary) 58%, transparent);
+  }
+
+  input,
+  textarea,
+  select,
+  button,
+  [role="button"],
+  [data-slot="card"],
+  dialog {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  input,
+  textarea,
+  select {
+    box-shadow: inset 0 1px 0 color-mix(in oklab, white 8%, transparent), var(--legal-3d-depth);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    transform: translateZ(8px);
+    box-shadow: inset 0 1px 0 color-mix(in oklab, white 12%, transparent), var(--legal-3d-depth-hover);
+  }
+
+  button,
+  [role="button"] {
+    transform: translateZ(0);
+    box-shadow: 0 8px 18px -16px color-mix(in oklab, var(--color-primary) 60%, transparent);
+  }
+
+  button:hover,
+  [role="button"]:hover {
+    transform: translateY(-2px) translateZ(7px);
+    box-shadow: var(--legal-3d-depth-hover);
+  }
+
+  button:active,
+  [role="button"]:active {
+    transform: translateY(1px) translateZ(1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    input, textarea, select, button, [role="button"] { transition: none; transform: none; }
+  }
+
   .smart-3d-environment {
     position: fixed;
     inset: 0;
