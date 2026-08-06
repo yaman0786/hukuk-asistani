@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CookieBanner } from "@/components/cookie-banner";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { initNativeShell } from "@/lib/native";
+import { Smart3DEnvironment } from "@/components/smart-3d-environment";
 
 function NotFoundComponent() {
   return (
@@ -178,6 +179,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Smart3DEnvironment />
       <Outlet />
       <CookieBanner />
     </QueryClientProvider>

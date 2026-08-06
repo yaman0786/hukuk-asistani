@@ -165,6 +165,17 @@
 }
 
 @layer base {
+  .smart-3d-environment {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    opacity: .72;
+    mix-blend-mode: screen;
+  }
+
   * {
     border-color: var(--color-border);
   }
