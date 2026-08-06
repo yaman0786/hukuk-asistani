@@ -40,6 +40,8 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  const isSupabaseConfigError = /Missing Supabase environment variable/i.test(error.message);
+  const incidentId = `HA-${Date.now().toString(36).toUpperCase()}`;
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
@@ -47,12 +49,18 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-destructive/10 text-destructive text-xl">
+          !
+        </div>
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          Bu sayfa yüklenemedi
+          {isSupabaseConfigError ? "Güvenli bağlantı hazır değil" : "Bu sayfa yüklenemedi"}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Bir sorun oluştu. Tekrar deneyebilir veya ana sayfaya dönebilirsiniz.
+          {isSupabaseConfigError
+            ? "Uygulamanın veri bağlantısı yapılandırılmamış. Bu durum kullanıcı verilerinizi korumak için oturumu durdurdu."
+            : "Bir sorun oluştu. Tekrar deneyebilir veya ana sayfaya dönebilirsiniz."}
         </p>
+        <p className="mt-3 text-[11px] text-muted-foreground/70">Olay kodu: {incidentId}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -70,6 +78,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             Ana sayfa
           </a>
         </div>
+        {isSupabaseConfigError && (
+          <p className="mt-5 text-xs text-muted-foreground">
+            Yöneticiyseniz Vercel ortam değişkenlerinde <code>SUPABASE_URL</code> ve{" "}
+            <code>SUPABASE_PUBLISHABLE_KEY</code> değerlerini kontrol edin.
+          </p>
+        )}
       </div>
     </div>
   );
