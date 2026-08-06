@@ -1,10 +1,9 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ArrowLeft, Download, Trash2, LogOut } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState, type ReactNode } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { OrbitControls, RoundedBox, Text } from "@react-three/drei";
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/hooks/useSubscription";
-import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { toast } from "sonner";
 import { openCustomerPortal } from "@/lib/subscription.functions";
 import { exportMyData, deleteMyAccount } from "@/lib/threads.functions";
@@ -105,108 +104,38 @@ function AccountPage() {
   }
 
   return (
-    <div className="min-h-[100dvh] bg-background text-foreground">
-      <PaymentTestModeBanner />
-      <header className="border-b border-border">
-        <div className="max-w-3xl mx-auto px-4 py-4 flex items-center gap-3">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="w-4 h-4" /> Sohbet
-          </Link>
-          <h1 className="ml-auto font-serif text-lg">Hesabım</h1>
-        </div>
-      </header>
-
-      <main className="max-w-3xl mx-auto px-4 py-8 space-y-6">
-        <section className="rounded-xl border border-border p-6 bg-card">
-          <h2 className="font-serif text-lg mb-4">Profil</h2>
-          <div className="text-sm text-muted-foreground">E-posta</div>
-          <div className="mb-4">{email ?? "…"}</div>
-          <Button variant="outline" size="sm" onClick={handleSignOut}>
-            <LogOut className="w-4 h-4 mr-2" /> Çıkış Yap
-          </Button>
-        </section>
-
-        <section className="rounded-xl border border-border p-6 bg-card">
-          <h2 className="font-serif text-lg mb-4">Abonelik</h2>
-          {loading ? (
-            <p className="text-sm text-muted-foreground">Yükleniyor…</p>
-          ) : (
-            <>
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-muted-foreground">Mevcut plan</div>
-                <div className="font-medium capitalize">{tier}</div>
-              </div>
-              {sub && (
-                <>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="text-sm text-muted-foreground">Durum</div>
-                    <div className="text-sm">{sub.status}</div>
-                  </div>
-                  {sub.current_period_end && (
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-sm text-muted-foreground">
-                        {sub.cancel_at_period_end ? "Erişim bitiş" : "Yenileme"}
-                      </div>
-                      <div className="text-sm">
-                        {new Date(sub.current_period_end).toLocaleDateString("tr-TR")}
-                      </div>
-                    </div>
-                  )}
-                  {sub.cancel_at_period_end && sub.current_period_end && (
-                    <div className="rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs p-3 mb-4">
-                      Aboneliğiniz iptal edildi. Dönem sonuna (
-                      {new Date(sub.current_period_end).toLocaleDateString("tr-TR")}) kadar erişim
-                      devam eder.
-                    </div>
-                  )}
-                </>
-              )}
-              <div className="flex flex-wrap gap-2 mt-4">
-                {tier === "free" ? (
-                  <Link to="/fiyatlar">
-                    <Button>Planları Görüntüle</Button>
-                  </Link>
-                ) : (
-                  <>
-                    <Link to="/fiyatlar">
-                      <Button variant="outline">Plan Değiştir</Button>
-                    </Link>
-                    <Button variant="outline" onClick={handlePortal} disabled={portalLoading}>
-                      {portalLoading ? "Açılıyor…" : "Ödeme / İptal Yönetimi"}
-                    </Button>
-                  </>
-                )}
-              </div>
-            </>
-          )}
-        </section>
-
-        <section className="rounded-xl border border-border p-6 bg-card">
-          <h2 className="font-serif text-lg mb-4">Verilerim</h2>
-          <p className="text-sm text-muted-foreground mb-4">
-            KVKK kapsamında verilerinizi dilediğiniz zaman indirebilir veya hesabınızı kalıcı olarak
-            silebilirsiniz.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <Button variant="outline" onClick={handleExport} disabled={exporting}>
-              <Download className="w-4 h-4 mr-2" />
-              {exporting ? "Hazırlanıyor…" : "Verilerimi İndir (JSON)"}
-            </Button>
-            <Button
-              variant="outline"
-              className="text-destructive hover:text-destructive"
-              onClick={handleDeleteAccount}
-              disabled={deleting}
-            >
-              <Trash2 className="w-4 h-4 mr-2" />
-              {deleting ? "Siliniyor…" : "Hesabımı Sil"}
-            </Button>
-          </div>
-        </section>
-      </main>
-    </div>
+    <Canvas frameloop="demand" dpr={[0.75, 1.25]} camera={{ position: [0, 0.4, 9], fov: 42 }} gl={{ antialias: false, powerPreference: "low-power", alpha: true }}>
+      <AccountMeshScene email={email ?? "Yükleniyor…"} tier={loading ? "Yükleniyor…" : tier} status={sub?.status ?? "Aktif"} onSignOut={handleSignOut} onPortal={handlePortal} onPlans={() => navigate({ to: "/fiyatlar" })} onExport={handleExport} onDelete={handleDeleteAccount} portalLoading={portalLoading} exporting={exporting} deleting={deleting} />
+      <OrbitControls enablePan={false} enableZoom={false} enableDamping dampingFactor={0.08} />
+    </Canvas>
   );
+}
+
+function AccountMeshScene(props: { email: string; tier: string; status: string; onSignOut: () => void; onPortal: () => void; onPlans: () => void; onExport: () => void; onDelete: () => void; portalLoading: boolean; exporting: boolean; deleting: boolean }) {
+  const { invalidate } = useThree();
+  const button = (label: string, position: [number, number, number], onClick: () => void, disabled = false, accent = "#2d6cff") => (
+    <group position={position} onPointerDown={(event) => { event.stopPropagation(); if (!disabled) onClick(); invalidate(); }}>
+      <RoundedBox args={[2.1, 0.42, 0.12]} radius={0.07} smoothness={2}><meshStandardMaterial color={disabled ? "#1e293b" : "#10295a"} emissive={accent} emissiveIntensity={disabled ? 0.05 : 0.3} metalness={0.65} roughness={0.22} /></RoundedBox>
+      <Text position={[0, 0, 0.08]} fontSize={0.12} color={disabled ? "#70809b" : "#f8fafc"} anchorX="center" anchorY="middle">{label}</Text>
+    </group>
+  );
+  const card = (title: string, lines: string[], position: [number, number, number], actions: ReactNode) => (
+    <group position={position}>
+      <RoundedBox args={[3.7, 2.25, 0.16]} radius={0.12} smoothness={3}><meshStandardMaterial color="#0b1830" emissive="#102b5c" emissiveIntensity={0.16} metalness={0.65} roughness={0.25} /></RoundedBox>
+      <Text position={[-1.55, 0.83, 0.11]} fontSize={0.18} color="#e9c46a" anchorX="left" anchorY="middle">{title}</Text>
+      {lines.map((line, index) => <Text key={line} position={[-1.55, 0.42 - index * 0.3, 0.11]} fontSize={0.13} color={index === 0 ? "#f8fafc" : "#9fb0cb"} anchorX="left" anchorY="middle" maxWidth={3.05}>{line}</Text>)}
+      {actions}
+    </group>
+  );
+  return <>
+    <color attach="background" args={["#050b18"]} />
+    <ambientLight intensity={0.55} /><pointLight position={[0, 4, 4]} intensity={14} color="#d8b455" /><pointLight position={[-5, 1, 3]} intensity={8} color="#315dff" />
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.3, 0]}><planeGeometry args={[16, 16]} /><meshStandardMaterial color="#071021" metalness={0.7} roughness={0.32} /></mesh>
+    <gridHelper args={[14, 28, "#1b3a68", "#0d1e3b"]} position={[0, -1.28, 0]} />
+    <Text position={[0, 3.15, 0]} fontSize={0.38} color="#f8fafc" anchorX="center" anchorY="middle">HESAP MERKEZİ</Text>
+    <Text position={[0, 2.72, 0]} fontSize={0.14} color="#a9b4ca" anchorX="center" anchorY="middle">Güvenli hesap, abonelik ve veri kontrolü</Text>
+    {card("PROFİL", ["E-posta", props.email], [-2.05, 1.0, 0], button("ÇIKIŞ YAP", [0, -0.72, 0.12], props.onSignOut))}
+    {card("ABONELİK", ["Mevcut plan", props.tier, `Durum: ${props.status}`], [2.05, 1.0, 0], <group position={[0, -0.72, 0.12]}>{props.tier === "free" ? button("PLANLARI GÖR", [0, 0, 0], props.onPlans) : <>{button("PLAN DEĞİŞTİR", [-1.1, 0, 0], props.onPlans)}{button(props.portalLoading ? "AÇILIYOR" : "ÖDEME YÖNETİMİ", [1.1, 0, 0], props.onPortal, props.portalLoading)}</>}</group>)}
+    {card("VERİLERİM", ["KVKK haklarınız", "Verilerinizi indirin veya hesabınızı kalıcı olarak yönetin."], [0, -1.55, 0], <group position={[0, -0.72, 0.12]}>{button(props.exporting ? "HAZIRLANIYOR" : "VERİLERİ İNDİR", [-1.1, 0, 0], props.onExport, props.exporting, "#34d399")}{button(props.deleting ? "SİLİNİYOR" : "HESABI SİL", [1.1, 0, 0], props.onDelete, props.deleting, "#ef4444")}</group>)}
+  </>;
 }
