@@ -53,6 +53,8 @@ import { OnboardingTour } from "@/components/onboarding-tour";
 import { CitationsList } from "@/components/citations-list";
 import { CaseFilesPanel } from "@/components/case-files-panel";
 import { assessGrounding } from "@/lib/rag-contract";
+import { Canvas } from "@react-three/fiber";
+import { ThreeMessageBubble, ThreePromptInput } from "@/components/3d/chat-mesh-components";
 
 import {
   Menu,
@@ -277,6 +279,7 @@ function ChatPage() {
   const [folderFilter, setFolderFilter] = useState<string | null>(null); // folder id, "none" for unassigned, null = all
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [selectedNeed, setSelectedNeed] = useState<Need | null>(null);
+  const [meshPrompt, setMeshPrompt] = useState("");
   const cancelSavedRef = useRef(false);
 
   const listFn = useServerFn(listThreads);
@@ -458,6 +461,11 @@ function ChatPage() {
       text: message.text?.trim() ?? "",
       files: message.files ?? [],
     });
+    setMeshPrompt("");
+  }
+
+  async function handleMeshSubmit(text: string) {
+    await handleSubmit({ text, files: [] });
   }
 
   async function handleQuickPrompt(text: string) {
@@ -1426,15 +1434,10 @@ function ChatPage() {
                         </div>
                       )}
                       {text && (
-                        <Message from={m.role === "user" ? "user" : "assistant"}>
-                          {m.role === "user" ? (
-                            <MessageContent>{text}</MessageContent>
-                          ) : (
-                            <MessageContent className="!bg-transparent !p-0">
-                              <MessageResponse>{text}</MessageResponse>
-                            </MessageContent>
-                          )}
-                        </Message>
+                        <Canvas frameloop="demand" dpr={[0.75, 1.25]} orthographic camera={{ position: [0, 0, 8], zoom: 95 }} gl={{ antialias: false, powerPreference: "low-power", alpha: true }} style={{ height: "max(96px, 15vh)", width: "100%" }}>
+                          <ambientLight intensity={0.7} />
+                          <ThreeMessageBubble text={text} role={m.role === "user" ? "user" : "assistant"} position={m.role === "user" ? [1.1, 0, 0] : [-1.1, 0, 0]} maxWidth={m.role === "user" ? 5.2 : 6.2} />
+                        </Canvas>
                       )}
                       {isAssistant && text && <AnswerQualityBadge text={text} />}
                       {isAssistant && text && <CitationsList text={text} />}
@@ -1524,34 +1527,15 @@ function ChatPage() {
 
         <div className="mobile-chat-composer border-t border-border bg-card/40 backdrop-blur px-4 py-3">
           <div className="max-w-3xl mx-auto">
-            <PromptInput
-              onSubmit={handleSubmit}
-              accept="image/*,application/pdf"
-              multiple
-              maxFiles={5}
-              maxFileSize={10 * 1024 * 1024}
-              onError={(e) => {
-                if (e.code === "max_files") toast.error("En fazla 5 dosya ekleyebilirsiniz.");
-                else if (e.code === "max_file_size") toast.error("Dosya çok büyük (maks. 10 MB).");
-                else if (e.code === "accept")
-                  toast.error("Yalnızca görsel veya PDF dosyası yükleyebilirsiniz.");
-              }}
-            >
-              <AttachmentsPreview />
-              <PromptInputTextarea placeholder="Hukuki sorunuzu yazın veya dosya/PDF ekleyin..." />
-              <PromptInputFooter>
-                <PromptInputTools>
-                  <AttachButton />
-                  <VoiceInputButton />
-                </PromptInputTools>
-                <PromptInputSubmit
-                  size="icon-sm"
-                  className="rounded-full h-9 w-9"
-                  status={status}
-                  onStop={stop}
-                />
-              </PromptInputFooter>
-            </PromptInput>
+            <Canvas frameloop="demand" dpr={[0.75, 1.25]} orthographic camera={{ position: [0, 0, 8], zoom: 95 }} gl={{ antialias: false, powerPreference: "low-power", alpha: true }} style={{ height: 110, width: "100%" }}>
+              <ambientLight intensity={0.7} />
+              <ThreePromptInput value={meshPrompt} onChange={setMeshPrompt} onSubmit={handleMeshSubmit} placeholder={status === "streaming" ? "Yanıt hazırlanıyor…" : "Hukuki sorunuzu yazın…"} position={[0, 0, 0]} width={6.5} />
+            </Canvas>
+            <div className="flex justify-center gap-2">
+              <AttachButton />
+              <VoiceInputButton />
+              {status === "streaming" && <button type="button" onClick={stop} className="text-xs text-destructive">Durdur</button>}
+            </div>
             <p className="text-[10px] text-muted-foreground text-center mt-2">
               Bilgilendirme amaçlıdır; avukatlık hizmeti veya kesin hukuki görüş yerine geçmez.
             </p>
