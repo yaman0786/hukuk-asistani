@@ -52,6 +52,7 @@ import { CommandPalette } from "@/components/command-palette";
 import { OnboardingTour } from "@/components/onboarding-tour";
 import { CitationsList } from "@/components/citations-list";
 import { CaseFilesPanel } from "@/components/case-files-panel";
+import { assessGrounding } from "@/lib/rag-contract";
 
 import {
   Menu,
@@ -1570,8 +1571,11 @@ function ChatPage() {
 }
 
 function AnswerQualityBadge({ text }: { text: string }) {
-  const needsVerification = /doğrulama gerekli|kaynak doğrulanmalı|teyit edilmelidir|emin değil/i.test(text);
-  const hasSources = /\[Kaynak:|\[Genel İlke\]/i.test(text);
+  const assessment = assessGrounding(text);
+  const needsVerification =
+    assessment.requiresVerification ||
+    /doğrulama gerekli|kaynak doğrulanmalı|teyit edilmelidir|emin değil/i.test(text);
+  const hasSources = assessment.hasSourceMarker;
   if (!needsVerification && !hasSources) return null;
   return (
     <div className={`mt-2 inline-flex max-w-full items-center gap-2 rounded-lg border px-3 py-2 text-[11px] ${needsVerification ? "border-amber-500/30 bg-amber-500/10 text-amber-800 dark:text-amber-300" : "border-emerald-500/25 bg-emerald-500/5 text-emerald-800 dark:text-emerald-300"}`}>
