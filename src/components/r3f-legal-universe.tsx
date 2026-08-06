@@ -1,6 +1,6 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { Html, OrbitControls, RoundedBox, Sparkles } from "@react-three/drei";
-import { useEffect, useRef } from "react";
+import { OrbitControls, RoundedBox, Sparkles, Text } from "@react-three/drei";
+import { useEffect, useRef, useState } from "react";
 import type { Group } from "three";
 
 function ResponsiveCamera() {
@@ -36,12 +36,34 @@ function HologramPanel({
         <planeGeometry />
         <meshBasicMaterial color={accent} transparent opacity={0.75} />
       </mesh>
-      <Html center transform position={[0, 0, 0.08]} distanceFactor={6} style={{ pointerEvents: "none", width: "150px", textAlign: "center", color: "#f8fafc", fontFamily: "Inter, sans-serif" }}>
-        <div>
-          <div style={{ fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", opacity: 0.68 }}>{label}</div>
-          <div style={{ fontSize: 22, fontWeight: 700, marginTop: 4, color: accent }}>{value}</div>
-        </div>
-      </Html>
+      <Text position={[0, 0.15, 0.08]} fontSize={0.12} color="#a9b4ca" anchorX="center" anchorY="middle" letterSpacing={0.08}>{label.toUpperCase()}</Text>
+      <Text position={[0, -0.08, 0.08]} fontSize={0.25} color={accent} anchorX="center" anchorY="middle" fontWeight={700}>{value}</Text>
+    </group>
+  );
+}
+
+function Pure3DInput() {
+  const [value, setValue] = useState("");
+  const [focused, setFocused] = useState(false);
+  const { invalidate } = useThree();
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (!focused) return;
+      if (event.key === "Backspace") setValue((v) => v.slice(0, -1));
+      else if (event.key === "Enter") setFocused(false);
+      else if (event.key.length === 1 && value.length < 42) setValue((v) => v + event.key);
+      invalidate();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [focused, invalidate, value.length]);
+  return (
+    <group position={[0, -0.85, 0.9]} onPointerDown={(event) => { event.stopPropagation(); setFocused(true); invalidate(); }}>
+      <RoundedBox args={[4.5, 0.56, 0.08]} radius={0.08} smoothness={2}>
+        <meshStandardMaterial color={focused ? "#172d5d" : "#0d1931"} emissive={focused ? "#2d6cff" : "#102348"} emissiveIntensity={focused ? 0.55 : 0.18} metalness={0.7} roughness={0.2} />
+      </RoundedBox>
+      <Text position={[-2.05, 0, 0.08]} fontSize={0.16} color="#8fa5cb" anchorX="left" anchorY="middle">HUKUKİ SORUNUZU YAZIN</Text>
+      <Text position={[0.15, 0, 0.08]} fontSize={0.18} color="#f8fafc" anchorX="left" anchorY="middle">{value || (focused ? "▌" : "Mesh’e dokunun")}</Text>
     </group>
   );
 }
@@ -70,6 +92,7 @@ function LegalRoom() {
       <HologramPanel position={[2.35, 1.55, -0.2]} label="Kaynak" value="98%" accent="#60a5fa" />
       <HologramPanel position={[-2.35, 0.25, 1.1]} label="Hazırlık" value="82" accent="#34d399" />
       <HologramPanel position={[2.35, 0.25, 1.1]} label="Risk" value="Düşük" accent="#fbbf24" />
+      <Pure3DInput />
       <Sparkles count={32} scale={[8, 4, 5]} size={1.2} speed={0.15} color="#c9a227" />
     </group>
   );
