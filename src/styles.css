@@ -450,7 +450,9 @@ button, a, input, textarea, select {
 
   .hearing-seat-judge { color: var(--color-primary); border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border)); }
 
-  .hearing-room-scene { position: relative; overflow: hidden; border: 1px solid color-mix(in oklab, var(--color-border) 80%, var(--color-primary)); border-radius: 1rem; padding: 1rem; background: linear-gradient(180deg, color-mix(in oklab, var(--color-primary) 7%, transparent), transparent 65%), var(--color-background); }
+  .hearing-room-scene { position: relative; overflow: hidden; isolation: isolate; perspective: 900px; border: 1px solid color-mix(in oklab, var(--color-border) 80%, var(--color-primary)); border-radius: 1rem; padding: 1rem; background: radial-gradient(circle at 50% 5%, color-mix(in oklab, var(--color-primary) 16%, transparent), transparent 28%), linear-gradient(180deg, color-mix(in oklab, var(--color-primary) 7%, transparent), transparent 65%), var(--color-background); }
+  .hearing-room-scene::before { content: ""; position: absolute; z-index: -1; inset: 42% -12% -55%; transform: rotateX(58deg); transform-origin: top; background: linear-gradient(90deg, transparent 49%, color-mix(in oklab, var(--color-primary) 12%, transparent) 50%, transparent 51%), linear-gradient(0deg, transparent 49%, color-mix(in oklab, var(--color-primary) 12%, transparent) 50%, transparent 51%); background-size: 38px 38px; mask-image: linear-gradient(to bottom, black, transparent); opacity: .45; }
+  .hearing-room-scene::after { content: ""; position: absolute; z-index: -1; top: -30%; left: 10%; width: 80%; height: 80%; border-radius: 50%; background: color-mix(in oklab, var(--color-primary) 14%, transparent); filter: blur(42px); opacity: .4; animation: hearing-light 8s ease-in-out infinite alternate; }
   .hearing-bench, .hearing-party, .hearing-clerk { display: flex; align-items: center; gap: .55rem; border: 1px solid var(--color-border); border-radius: .75rem; background: color-mix(in oklab, var(--color-card) 86%, transparent); padding: .7rem .8rem; color: var(--color-foreground); }
   .hearing-bench { max-width: 19rem; margin: 0 auto; justify-content: center; border-color: color-mix(in oklab, var(--color-primary) 45%, var(--color-border)); box-shadow: 0 10px 20px -16px var(--color-primary); }
   .hearing-bench div { display: grid; text-align: left; }
@@ -462,6 +464,10 @@ button, a, input, textarea, select {
   .hearing-party-right { justify-content: flex-end; border-right: 3px solid var(--color-accent); }
   .hearing-room-footer { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem 1.2rem; margin-top: .8rem; color: var(--color-muted-foreground); font-size: .68rem; }
   .hearing-room-footer span { display: inline-flex; align-items: center; gap: .3rem; }
+  .hearing-bench, .hearing-clerk, .hearing-party { transform: translateZ(12px); box-shadow: 0 14px 24px -22px color-mix(in oklab, var(--color-primary) 80%, transparent); }
+  .hearing-bench { transform: translateZ(28px); }
+  @keyframes hearing-light { from { transform: translateX(-8%) scale(.9); } to { transform: translateX(8%) scale(1.1); } }
+  @media (prefers-reduced-motion: reduce) { .hearing-room-scene::after { animation: none; } .hearing-bench, .hearing-clerk, .hearing-party { transform: none; } }
   @media (max-width: 480px) { .hearing-party-row { gap: .4rem; } .hearing-party { padding: .6rem .45rem; font-size: .7rem; } .hearing-room-footer { gap: .5rem; } }
 
   .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl {
