@@ -39,7 +39,6 @@ import {
   PromptInputSubmit,
   PromptInputFooter,
   PromptInputTools,
-  PromptInputButton,
   type PromptInputMessage,
 } from "@/components/ai-elements/prompt-input";
 

@@ -24,7 +24,9 @@ export function VoiceInputButton() {
     return () => {
       try {
         recRef.current?.stop?.();
-      } catch {}
+      } catch {
+        // Recognition may already be stopped during unmount.
+      }
     };
   }, []);
 
@@ -85,7 +87,9 @@ export function VoiceInputButton() {
   function stop() {
     try {
       recRef.current?.stop?.();
-    } catch {}
+    } catch {
+      // Recognition may already have ended.
+    }
     setListening(false);
   }
 
