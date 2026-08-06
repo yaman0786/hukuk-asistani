@@ -66,6 +66,8 @@ export function Smart3DEnvironment() {
 
     let frame = 0;
     let active = true;
+    let visible = true;
+    let lastInteraction = performance.now();
     let pointer = { x: 0, y: 0 };
     const vertex = compile(gl, gl.VERTEX_SHADER, VERTEX);
     const fragment = compile(gl, gl.FRAGMENT_SHADER, FRAGMENT);
@@ -89,35 +91,50 @@ export function Smart3DEnvironment() {
     const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const resize = () => {
-      const ratio = Math.min(devicePixelRatio || 1, 1.5);
+      const ratio = Math.min(devicePixelRatio || 1, innerWidth < 768 ? 1 : 1.5);
       canvas.width = Math.max(1, Math.floor(innerWidth * ratio));
       canvas.height = Math.max(1, Math.floor(innerHeight * ratio));
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform2f(resolution, canvas.width, canvas.height);
+      lastInteraction = performance.now();
       active = true;
-      if (!frame) frame = requestAnimationFrame(render);
+      if (!frame && visible) frame = requestAnimationFrame(render);
     };
     const move = (event: PointerEvent) => {
       pointer = { x: event.clientX / innerWidth * 2 - 1, y: -(event.clientY / innerHeight * 2 - 1) };
+      lastInteraction = performance.now();
       active = true;
-      if (!frame) frame = requestAnimationFrame(render);
+      if (!frame && visible) frame = requestAnimationFrame(render);
     };
     const render = (now: number) => {
       frame = 0;
-      if (!active) return;
+      if (!active || !visible) return;
       gl.uniform1f(time, prefersReduced ? 0 : now);
       gl.uniform2f(pointerUniform, pointer.x, pointer.y);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      active = !prefersReduced;
+      active = !prefersReduced && now - lastInteraction < 900;
       if (active) frame = requestAnimationFrame(render);
+    };
+    const visibility = () => {
+      visible = document.visibilityState === "visible";
+      if (visible) {
+        lastInteraction = performance.now();
+        active = true;
+        if (!frame) frame = requestAnimationFrame(render);
+      } else if (frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
     };
     resize();
     addEventListener("resize", resize, { passive: true });
     addEventListener("pointermove", move, { passive: true });
+    document.addEventListener("visibilitychange", visibility);
     return () => {
       if (frame) cancelAnimationFrame(frame);
       removeEventListener("resize", resize);
       removeEventListener("pointermove", move);
+      document.removeEventListener("visibilitychange", visibility);
       gl.deleteProgram(program);
       gl.deleteShader(vertex);
       gl.deleteShader(fragment);
