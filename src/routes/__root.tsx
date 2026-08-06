@@ -15,6 +15,7 @@ import { CookieBanner } from "@/components/cookie-banner";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { initNativeShell } from "@/lib/native";
 import { Smart3DEnvironment } from "@/components/smart-3d-environment";
+import { R3FLegalUniverse } from "@/components/r3f-legal-universe";
 
 function NotFoundComponent() {
   return (
@@ -180,6 +181,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Smart3DEnvironment />
+      <R3FLegalUniverse />
       <Outlet />
       <CookieBanner />
     </QueryClientProvider>

@@ -192,6 +192,15 @@
     opacity: .72;
     mix-blend-mode: screen;
   }
+  .r3f-legal-universe {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: auto;
+    opacity: .9;
+    background: #071021;
+  }
+  .r3f-legal-universe canvas { display: block; width: 100% !important; height: 100% !important; }
 
   * {
     border-color: var(--color-border);
