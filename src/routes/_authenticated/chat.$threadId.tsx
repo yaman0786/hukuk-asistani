@@ -374,7 +374,10 @@ function ChatPage() {
   });
 
   const caseWorkflow = useMemo(() => {
-    const text = messages.map((m) => getMessageText(m)).join(" ").toLocaleLowerCase("tr");
+    const text = messages
+      .map((m) => m.parts.map((p) => (p.type === "text" ? p.text : "")).join(""))
+      .join(" ")
+      .toLocaleLowerCase("tr");
     return [
       { label: "Vaka kaydı", done: messages.length > 0 },
       { label: "Kaynak taraması", done: /\[kaynak:|mevzuat|yargıtay|emsal/i.test(text) },

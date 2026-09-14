@@ -21,6 +21,7 @@ import {
   CheckCircle2,
   CalendarDays,
   Clock3,
+  type LucideIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -441,15 +442,17 @@ export function CaseFilesPanel() {
               </span>
             </div>
             <div className="grid gap-2 sm:grid-cols-4">
-              {[
-                ["Toplam dosya", allFiles.length, FileText],
-                ["Bot aktif", activeCount, Bot],
-                ["Analiz edilen", allFiles.filter((f) => f.last_analyzed_at).length, CheckCircle2],
-                ["Eksik analiz", allFiles.filter((f) => !f.last_analyzed_at).length, AlertTriangle],
-              ].map(([label, value, Icon]) => (
-                <div key={label as string} className="rounded-lg border border-border/70 bg-background/60 p-2.5">
-                  <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground"><Icon className="size-3.5 text-primary" />{label as string}</div>
-                  <div className="mt-1 text-lg font-semibold tabular-nums">{value as number}</div>
+              {(
+                [
+                  { label: "Toplam dosya", value: allFiles.length, Icon: FileText },
+                  { label: "Bot aktif", value: activeCount, Icon: Bot },
+                  { label: "Analiz edilen", value: allFiles.filter((f) => f.last_analyzed_at).length, Icon: CheckCircle2 },
+                  { label: "Eksik analiz", value: allFiles.filter((f) => !f.last_analyzed_at).length, Icon: AlertTriangle },
+                ] satisfies Array<{ label: string; value: number; Icon: LucideIcon }>
+              ).map(({ label, value, Icon }) => (
+                <div key={label} className="rounded-lg border border-border/70 bg-background/60 p-2.5">
+                  <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground"><Icon className="size-3.5 text-primary" />{label}</div>
+                  <div className="mt-1 text-lg font-semibold tabular-nums">{value}</div>
                 </div>
               ))}
             </div>
