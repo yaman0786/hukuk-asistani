@@ -16,6 +16,7 @@ import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { initNativeShell } from "@/lib/native";
 import { Smart3DEnvironment } from "@/components/smart-3d-environment";
 import { R3FLegalUniverse } from "@/components/r3f-legal-universe";
+import { AssistantAvatarWidget } from "@/components/assistant-avatar-widget";
 
 function NotFoundComponent() {
   return (
@@ -185,6 +186,7 @@ function RootComponent() {
       <div className="route-3d-content">
         <Outlet />
       </div>
+      <AssistantAvatarWidget />
       <CookieBanner />
     </QueryClientProvider>
   );
