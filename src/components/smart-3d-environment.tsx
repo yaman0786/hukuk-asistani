@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { AiCommandOrb } from "@/components/ai-command-orb";
 
 const VERTEX = `
 attribute vec2 a_position;
@@ -47,8 +48,8 @@ function compile(gl: WebGL2RenderingContext, type: number, source: string) {
 }
 
 /**
- * Shared low-cost 3D atmosphere. It renders only while active and falls back
- * silently when WebGL2 is unavailable. It never captures pointer events.
+ * Shared low-cost 3D atmosphere plus the global Hukuk AI command center.
+ * The canvas renders only while active and falls back silently when WebGL2 is unavailable.
  */
 export function Smart3DEnvironment() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -143,10 +144,13 @@ export function Smart3DEnvironment() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className="smart-3d-environment"
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className="smart-3d-environment"
+      />
+      <AiCommandOrb />
+    </>
   );
 }
