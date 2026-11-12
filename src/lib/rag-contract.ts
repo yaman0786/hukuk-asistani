@@ -1,16 +1,16 @@
 /**
- * Server-side answer safety helpers.
- * This is intentionally deterministic: it never decides whether a legal claim
- * is true; it only detects when a response needs human/source verification.
+ * A citation marker is model-generated text, not evidence that a legal source
+ * was retrieved, authenticated, current, or supports the claim.
+ * This helper deliberately never marks a legal claim as source-verified.
  */
 const SPECIFIC_LEGAL_CLAIM =
   /(?:madd(?:esi|e)|kanun|yönetmelik|tebliğ|karar|esas|süre|gün|ay|yıl|harç|parasal sınır)/iu;
-const SOURCE_MARKER = /\[(?:Kaynak|Genel İlke)(?::[^\]]+)?\]/iu;
+const SOURCE_MARKER = /\[(?:Kaynak(?::[^\]]+)?|Genel İlke)\]/iu;
 
 export type GroundingAssessment = {
   hasSourceMarker: boolean;
   requiresVerification: boolean;
-  reason: "grounded" | "general" | "specific-claim-without-source" | "empty";
+  reason: "unverified-source-marker" | "general" | "specific-claim-without-source" | "empty";
 };
 
 export function assessGrounding(answer: string): GroundingAssessment {
@@ -20,7 +20,7 @@ export function assessGrounding(answer: string): GroundingAssessment {
   }
   const hasSourceMarker = SOURCE_MARKER.test(text);
   if (hasSourceMarker) {
-    return { hasSourceMarker: true, requiresVerification: false, reason: "grounded" };
+    return { hasSourceMarker: true, requiresVerification: true, reason: "unverified-source-marker" };
   }
   if (SPECIFIC_LEGAL_CLAIM.test(text)) {
     return {
